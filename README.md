@@ -11,4 +11,5 @@
 - Không động vào phần code của người khác, đối với phần code chung nếu có thay đổi gì thì cần phải thông báo
 
 - Không dồn nhiều thay đổi vào một lần commit. Khi commit cần ghi nội dung commit là hành động mình thực hiện
+
 Ví dụ: add player movement, add sprites, update gameplay...
