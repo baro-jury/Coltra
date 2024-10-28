@@ -73,18 +73,22 @@ public class MonsterController : MonoBehaviour
 
     }
 
-    internal virtual void MonsterMove()
+    void FixedUpdate()
+    {
+        MonsterMove();
+    }
+
+    internal void MonsterMove()
     {
         Vector2 direction = target.transform.position - transform.position;
         Vector2 velocity = direction.normalized * monster.velocity;
         rb2D.velocity = velocity;
 
-
         Flip(rb2D.velocity.x);
 
     }
 
-    protected void Flip(float xVel)
+    void Flip(float xVel)
     {
         Vector3 scale = transform.localScale;
         if (xVel * scale.x * (int)spriteDirection < 0) scale.x *= -1f;
