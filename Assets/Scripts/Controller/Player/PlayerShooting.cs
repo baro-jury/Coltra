@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerShooting : MonoBehaviour
 {
-    
     public Transform shootPoint;
     public GameObject bulletPrefab;
 
@@ -34,13 +33,13 @@ public class PlayerShooting : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            GameObject g = ObjectPool.Instance.GetObject(bulletPrefab);
-            g.transform.position = shootPoint.position;
+            GameObject bullet = ObjectPool.Instance.GetObject(bulletPrefab);
+            bullet.transform.position = shootPoint.position;
 
             float dir = player.player_dir;
-            g.transform.rotation = Quaternion.Euler(0, (dir == 1 ? 0 : -180), 0);
-
-            g.SetActive(true);
+            bullet.transform.rotation = Quaternion.Euler(0, (dir == 1 ? 0 : -180), 0);
+            
+            bullet.SetActive(true);
 
             _shootTimeCount = _shootTime;
         }

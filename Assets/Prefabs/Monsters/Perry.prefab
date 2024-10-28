@@ -153,7 +153,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6a51c82426ca7242b6cc1b36e36be9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monster:
+    health: 1
+    velocity: 3
   colorData: {fileID: 11400000, guid: 8d44df4bce335bc4d92eb7e0bd1a9fc0, type: 2}
+  spriteDirection: -1
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  bulletPool: []
+  bullet: {fileID: 0}
+  amountBulletsToPool: 0
+  attackPoint: {fileID: 0}
+  attacksPerSec: 0
+  minimumDistanceAttack: 0
+  bulletForce: 0
+  meleeDamage: 1
+  currentHP: 0
 --- !u!1 &8578355755531340853
 GameObject:
   m_ObjectHideFlags: 0

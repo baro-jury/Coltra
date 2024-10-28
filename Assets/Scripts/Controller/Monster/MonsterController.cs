@@ -13,8 +13,8 @@ public class MonsterController : MonoBehaviour
 
     [Header("---------- Monster ----------")]
     [SerializeField] private Monster monster;
-    [SerializeField] private ColorData colorData;
-
+    
+    internal SpriteRenderer spriteRenderer;
     internal Rigidbody2D rb2D;
     internal Animator anim;
     internal List<Color> colorList;
@@ -44,28 +44,35 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         rb2D = GetComponent<Rigidbody2D>();
 
         InitColors();
         target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
+        InitForAttack();
     }
 
     void InitColors()
     {
-        colorList = new List<Color>();
-        colorList.Add(colorData.grey);
-        colorList.Add(colorData.green);
-        colorList.Add(colorData.blue);
-        colorList.Add(colorData.red);
-        colorList.Add(colorData.yellow);
+        var list = GameManager.instance.colorData.colorList;
+        spriteRenderer.color = list[Random.Range(0, list.Count)];
+    }
 
-        //colorList.Add(colorData.red);
-        //colorList.Add(colorData.orange);
-        //colorList.Add(colorData.yellow);
-        //colorList.Add(colorData.green);
-        //colorList.Add(colorData.blue);
-        //colorList.Add(colorData.indigo);
-        //colorList.Add(colorData.violet);
+    void InitForAttack()
+    {
+        if (bullet != null)
+        {
+            Transform pool = GameObject.Find("ObjectPool").transform;
+            bulletPool = new List<GameObject>();
+            GameObject temp;
+            for (int i = 0; i < amountBulletsToPool; i++)
+            {
+                temp = Instantiate(bullet, pool);
+                temp.SetActive(false);
+                bulletPool.Add(temp);
+            }
+        }
     }
 
     void Update()
@@ -85,7 +92,6 @@ public class MonsterController : MonoBehaviour
         rb2D.velocity = velocity;
 
         Flip(rb2D.velocity.x);
-
     }
 
     void Flip(float xVel)
