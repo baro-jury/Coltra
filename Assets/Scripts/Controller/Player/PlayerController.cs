@@ -2,31 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : CharacterBase
 {
-    #region Components
-    [Header("Components")]
-    private Rigidbody2D rb;
-    private BoxCollider2D collid;
-    private GameObject currentOneWayPlatform;
-    [SerializeField] private List<GameObject> platformCantFall;
-    #endregion
-
-    #region Movement
-    [Header("Player Movement")]
-    public float speed = 200.0f;
-    public float jumpForce = 18.0f;
-    #endregion
-
-    #region Ground Check
-    [Header("Ground Check")]
-    [SerializeField] private LayerMask groundLayer;
-    [SerializeField] private Transform groundCheck;
-    #endregion
+    
 
     private float inputX;
-    private int player_dir = 1; // Huong cua nhan vat, de tinh toan huong cua vien dan
+    public int player_dir = 1; // Huong cua nhan vat, de tinh toan huong cua vien dan
     private bool facing_right = true;
+
+    private Dictionary<Color, int> absorbedBullets = new();
 
     void Start()
     {
@@ -135,5 +119,32 @@ public class PlayerController : MonoBehaviour
         {
             Gizmos.DrawSphere(hit.point, 0.05f);
         }
+    }
+
+    public void AbsorbBullet(Color bulletColor)
+    {
+        if (currentColor == null)
+        {
+            currentColor = bulletColor;
+        }
+        else if (currentColor != bulletColor)
+        {
+            HandleGameOver();
+            return;
+        }
+
+        if (absorbedBullets.ContainsKey(bulletColor))
+        {
+            absorbedBullets[bulletColor]++;
+        }
+        else
+        {
+            absorbedBullets[bulletColor] = 1;
+        }
+    }
+
+    private void HandleGameOver()
+    {
+        Debug.Log("Game Over! You absorbed a different color.");
     }
 }
