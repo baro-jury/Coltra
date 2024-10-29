@@ -35,7 +35,7 @@ public class PlayerController : CharacterBase
             return;
         InputControl();
         FlipController();
-        TestShoot();
+        PlayerShoot();
     }
 
     private void InputControl()
@@ -82,7 +82,7 @@ public class PlayerController : CharacterBase
             Flip();
     }
 
-    private void TestShoot()
+    private void PlayerShoot()
     {
         if (_shootTimeCount > 0)
         {
@@ -164,7 +164,7 @@ public class PlayerController : CharacterBase
 
     private void Die()
     {
-        GameEvent.OnDeadEvent?.Invoke();
+        GameEvent.OnPlayerDead?.Invoke();
         isDead = true;
         Debug.Log("You are dead!!!");
         Time.timeScale = 0;
@@ -175,7 +175,6 @@ public class PlayerController : CharacterBase
         AbsorbBullettDict.Clear();
         isGray = false;
         currentColor = bulletColor;
-        //AbsorbBullettDict[bulletColor] = 1;
         AbsorbBullettDict.Add(currentColor, 1);
         UpdatePlayerColor();
     }
@@ -183,19 +182,5 @@ public class PlayerController : CharacterBase
     void UpdatePlayerColor()
     {
         GetComponent<SpriteRenderer>().color = ColorData.GetColor(currentColor);
-    }
-
-    void FireBullet()
-    {
-        if (!isGray && AbsorbBullettDict[currentColor] > 0)
-        {
-            AbsorbBullettDict[currentColor]--;
-            if (AbsorbBullettDict[currentColor] <= 0)
-            {
-                currentColor = CharacterColor.GRAY;
-                isGray = true;
-                UpdatePlayerColor();
-            }
-        }
     }
 }
