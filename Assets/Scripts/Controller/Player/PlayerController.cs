@@ -16,6 +16,9 @@ public class PlayerController : CharacterBase
     [Header("Bullet available")]
     private Dictionary<Color, int> absorbedBullets = new();
 
+    public bool isGray = true;
+    public Dictionary<Color, int> ammoCount = new();
+
     protected override void Start()
     {
         base.Start();
@@ -80,13 +83,17 @@ public class PlayerController : CharacterBase
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.C) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             GameObject g = ObjectPool.Instance.GetObject(bulletPrefab);
             g.transform.position = shootPoint.position;
 
             float dir = character_dir;
             g.transform.rotation = Quaternion.Euler(0, (dir == 1 ? 0 : -180), 0);
+
+            BulletBase bulletBase = g.GetComponent<BulletBase>();
+            bulletBase.SetBulletColor(currentColor);
+            bulletBase.ChangeBulletColor();
 
             g.SetActive(true);
 
@@ -121,5 +128,72 @@ public class PlayerController : CharacterBase
     private void HandleGameOver()
     {
         Debug.Log("Game Over! You absorbed a different color.");
+    }
+
+    ///
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(GameConstants.enemyBullet))
+        {
+            TakeDamage(collision.GetComponent<BulletBase>().bulletColor);
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    void TakeDamage(Color bulletColor)
+    {
+        if (isGray)
+        {
+            AbsorbBullett(bulletColor);
+        }
+        else if (bulletColor != currentColor)
+        {
+            DecreaseHealth();
+            if (lives == 0)
+            {
+                Die();
+                return;
+            }
+            currentColor = bulletColor;
+            UpdatePlayerColor();
+        }
+        else
+        {
+            ammoCount[bulletColor]++;
+        }
+    }
+    
+    private void Die()
+    {
+        Debug.Log("You are dead!!!");
+    }
+
+    void AbsorbBullett(Color bulletColor)
+    {
+        isGray = false;
+        currentColor = bulletColor;
+        ammoCount[bulletColor] = 1;
+        UpdatePlayerColor();
+    }
+
+    void UpdatePlayerColor()
+    {
+        // Update sprite or material color
+        GetComponent<SpriteRenderer>().color = currentColor;
+    }
+
+    void FireBullet()
+    {
+        if (!isGray && ammoCount[currentColor] > 0)
+        {
+            ammoCount[currentColor]--;
+            if (ammoCount[currentColor] <= 0)
+            {
+                currentColor = Color.gray;
+                isGray = true;
+                UpdatePlayerColor();
+            }
+        }
     }
 }

@@ -480,10 +480,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundCheck: {fileID: 471805959}
+  currentColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  lives: 3
   character_dir: 1
   shootPoint: {fileID: 1009661173}
   bulletPrefab: {fileID: 6510611370532917505, guid: 18e76720ba51e4643bc485af3fa10446, type: 3}
   _shootTime: 0.3
+  isGray: 1
 --- !u!61 &650376206
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -573,7 +576,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
