@@ -13,26 +13,25 @@ public class MonsterController : MonoBehaviour
 
     [Header("---------- Monster ----------")]
     [SerializeField] private Monster monster;
-    
+
     internal SpriteRenderer spriteRenderer;
     internal Rigidbody2D rb2D;
     internal Animator anim;
     internal List<Color> colorList;
 
-    internal PlayerController target;
+    [SerializeField] internal PlayerController target;
 
     [Header("---------- Movement ----------")]
     public SpriteDirection spriteDirection;
-    public LayerMask obstacleLayers;
+    internal Vector2 direction;
 
     [Header("---------- Attack ----------")]
+    public GameObject bulletPrefab;
     public List<GameObject> bulletPool;
-    public GameObject bullet;
     public int amountBulletsToPool;
 
     public Transform attackPoint;
     public float attacksPerSec;
-    public float minimumDistanceAttack;
     public float bulletForce;
 
     [SerializeField] protected int meleeDamage = 1;
@@ -48,7 +47,9 @@ public class MonsterController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
 
         InitColors();
-        target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        //target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+
+        direction = new Vector2(target.transform.position.x - transform.position.x, 0);
 
         InitForAttack();
     }
@@ -61,14 +62,15 @@ public class MonsterController : MonoBehaviour
 
     void InitForAttack()
     {
-        if (bullet != null)
+        if (bulletPrefab != null)
         {
             Transform pool = GameObject.Find("ObjectPool").transform;
             bulletPool = new List<GameObject>();
             GameObject temp;
             for (int i = 0; i < amountBulletsToPool; i++)
             {
-                temp = Instantiate(bullet, pool);
+                temp = Instantiate(bulletPrefab, pool);
+                temp.GetComponent<EnemyBulletController>()._renderer.color = spriteRenderer.color;
                 temp.SetActive(false);
                 bulletPool.Add(temp);
             }
@@ -77,7 +79,7 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-
+        MonsterAttack();
     }
 
     void FixedUpdate()
@@ -85,9 +87,8 @@ public class MonsterController : MonoBehaviour
         MonsterMove();
     }
 
-    internal void MonsterMove()
+    void MonsterMove()
     {
-        Vector2 direction = target.transform.position - transform.position;
         Vector2 velocity = direction.normalized * monster.velocity;
         rb2D.velocity = velocity;
 
@@ -99,6 +100,52 @@ public class MonsterController : MonoBehaviour
         Vector3 scale = transform.localScale;
         if (xVel * scale.x * (int)spriteDirection < 0) scale.x *= -1f;
         transform.localScale = scale;
+    }
+
+    void MonsterAttack()
+    {
+        if (Time.time < lastTimeAttack + 1 / attacksPerSec)
+        {
+            return;
+        }
+
+        //anim.SetTrigger("IsAttacking");
+        RangedAttack();
+
+        lastTimeAttack = Time.time;
+    }
+
+    void RangedAttack()
+    {
+        Vector2 shootDir = target.transform.position - attackPoint.position;
+        if (shootDir.x * direction.x <= 0) return;
+        ShootBullet(shootDir);
+    }
+
+    void ShootBullet(Vector2 direction)
+    {
+        GameObject bullet = GetPooledBullet();
+        var bulletCtrl = bullet.GetComponent<EnemyBulletController>();
+        if (bullet != null)
+        {
+            bullet.transform.position = attackPoint.position;
+            float rotateValue = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
+            bullet.transform.rotation = Quaternion.Euler(0, 0, rotateValue + (int)bulletCtrl.spriteDirection);
+            bullet.SetActive(true);
+            bulletCtrl._rigid.AddForce(direction.normalized * bulletForce);
+        }
+    }
+
+    private GameObject GetPooledBullet()
+    {
+        for (int i = 0; i < bulletPool.Count; i++)
+        {
+            if (!bulletPool[i].activeInHierarchy)
+            {
+                return bulletPool[i];
+            }
+        }
+        return null;
     }
 
 }

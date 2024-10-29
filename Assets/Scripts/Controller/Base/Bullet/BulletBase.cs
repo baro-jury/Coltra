@@ -4,29 +4,41 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour
 {
-    [SerializeField] internal float _speed = 100.0f;
+    public enum SpriteDirection
+    {
+        TOP = 90,
+        BOTTOM = -90,
+        LEFT = 0,
+        RIGHT = 180
+    }
+    public SpriteDirection spriteDirection;
+
     [SerializeField] float _lifeTime = 5.0f;
     internal Rigidbody2D _rigid;
+    internal SpriteRenderer _renderer;
     public Color bulletColor;
-    
+
     private void Awake()
     {
-        
+        //color = CharacterBase.getCharactorColor();
+        _rigid = GetComponent<Rigidbody2D>();
+        _renderer = GetComponent<SpriteRenderer>();
     }
+
     void Start()
     {
-        _rigid = this.GetComponent<Rigidbody2D>();
+        
     }
 
     void Update()
     {
-        _rigid.velocity = _speed * Time.deltaTime * this.transform.right;
+        //_rigid.velocity = _speed * Time.deltaTime * this.transform.right;
     }
 
     protected void HideBullet()
     {
         gameObject.SetActive(false);
-        //_rigid.velocity = Vector2.zero;
+        _rigid.velocity = Vector2.zero;
     }
 
     private void OnEnable()
@@ -41,7 +53,7 @@ public class BulletBase : MonoBehaviour
     }
 
     // Xu ly VFX va va cham
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         //GameObject g = ObjectPooling.Instance.getVFX();
         //g.transform.position = this.transform.position;
