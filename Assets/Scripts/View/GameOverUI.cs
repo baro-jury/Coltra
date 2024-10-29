@@ -20,7 +20,8 @@ public class GameOverUI : MonoBehaviour
 
     private void HandleReplayGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneController.Instance.ReLoadScene();
 
         Time.timeScale = 1;
     }

@@ -62,6 +62,7 @@ public class MonsterController : MonoBehaviour
         timer = 0;
 
         InitForAttack();
+
     }
 
     void InitColors()
@@ -172,6 +173,33 @@ public class MonsterController : MonoBehaviour
             }
         }
         return null;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(GameConstants.playerBullet))
+        {
+            //DecreaseHealth();
+            if (collision.GetComponent<BulletBase>().bulletColor == characterColor)
+                DecreaseHealth();
+            if (IsDead())
+            {
+                gameObject.SetActive(false);
+                GameEvent.OnEnemyKill?.Invoke(characterColor);
+            }
+
+            collision.gameObject.SetActive(false);
+        }
+    }
+
+    private void DecreaseHealth()
+    {
+        monster.health--;
+    }
+
+    private bool IsDead()
+    {
+        return monster.health == 0;
     }
 
     void MonsterState()

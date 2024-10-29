@@ -70,7 +70,7 @@ public class CharacterBase : MonoBehaviour
         BoxCollider2D platformCollider = currentOneWayPlatform.GetComponent<BoxCollider2D>();
 
         Physics2D.IgnoreCollision(collid, platformCollider);
-        yield return new WaitForSeconds(1.0f);
+        yield return new WaitForSeconds(0.5f);
         Physics2D.IgnoreCollision(collid, platformCollider, false);
     }
 

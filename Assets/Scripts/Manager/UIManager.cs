@@ -7,12 +7,12 @@ public class UIManager : Singleton<UIManager>
     [SerializeField] GameObject gameOverUI;
     private void Awake()
     {
-        GameEvent.OnDeadEvent += ShowGameOverUI;
+        GameEvent.OnPlayerDead += ShowGameOverUI;
     }
 
     private void OnDestroy()
     {
-        GameEvent.OnDeadEvent -= ShowGameOverUI;
+        GameEvent.OnPlayerDead -= ShowGameOverUI;
     }
 
     public void ShowGameOverUI()
