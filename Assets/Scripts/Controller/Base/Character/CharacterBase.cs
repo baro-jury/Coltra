@@ -2,6 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CharacterColor
+{
+    GRAY,
+    RED,
+    ORANGE,
+    YELLOW,
+    GREEN,
+    BLUE,
+    PURPLE_BOLD,
+    PURPLE,
+}
+
 public class CharacterBase : MonoBehaviour
 {
     #region Components
@@ -25,7 +37,8 @@ public class CharacterBase : MonoBehaviour
     #endregion
 
     [Header("Color")]
-    public Color? currentColor = null;
+    public Color currentColor = Color.gray;
+    public int lives = 3;
 
     [HideInInspector] public int character_dir = 1; // Huong cua nhan vat, de tinh toan huong cua vien dan
     protected bool facing_right = true;
@@ -35,6 +48,23 @@ public class CharacterBase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         collid = GetComponent<BoxCollider2D>();
     }
+
+    void InitColors()
+    {
+        var list = GameManager.instance.colorData.colorList;
+        
+    }
+
+    protected void DecreaseHealth()
+    {
+        lives--;
+    }
+
+    protected void IncreaseHealth()
+    {
+        lives++;
+    }
+
 
     public void Flip()
     {

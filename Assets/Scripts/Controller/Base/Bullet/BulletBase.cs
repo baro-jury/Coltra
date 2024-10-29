@@ -7,11 +7,11 @@ public class BulletBase : MonoBehaviour
     [SerializeField] internal float _speed = 100.0f;
     [SerializeField] float _lifeTime = 5.0f;
     internal Rigidbody2D _rigid;
-    public Color? color;
+    public Color bulletColor;
     
     private void Awake()
     {
-        //color = CharacterBase.getCharactorColor();
+        
     }
     void Start()
     {
@@ -50,5 +50,16 @@ public class BulletBase : MonoBehaviour
 
         //if (collision.CompareTag("Wall"))
         //    Destroy(collision.gameObject);
+    }
+
+    public void SetBulletColor(Color color)
+    {
+        this.bulletColor = color;
+    }
+
+    public void ChangeBulletColor()
+    {
+        if (bulletColor != null)
+            GetComponent<SpriteRenderer>().color = bulletColor;
     }
 }
