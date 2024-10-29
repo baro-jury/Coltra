@@ -355,7 +355,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 2224065734722611022, guid: 65d27de4fddd98647ad58ca26632f30c, type: 3}
       propertyPath: delaySpawnTime
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2224065734722611023, guid: 65d27de4fddd98647ad58ca26632f30c, type: 3}
       propertyPath: m_RootOrder
@@ -363,7 +363,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2224065734722611023, guid: 65d27de4fddd98647ad58ca26632f30c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -19.76
+      value: 23.18
       objectReference: {fileID: 0}
     - target: {fileID: 2224065734722611023, guid: 65d27de4fddd98647ad58ca26632f30c, type: 3}
       propertyPath: m_LocalPosition.y
