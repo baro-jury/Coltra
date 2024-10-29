@@ -1,23 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerController : CharacterBase
 {
     private float inputX;
 
-    [Header("Shoot")]
+    [Header("---------Shoot---------")]
     public Transform shootPoint;
     public GameObject bulletPrefab;
-    [SerializeField] internal float _speedBullet = 500.0f;
     [SerializeField] private float _shootTime;
     float _shootTimeCount = 0;
 
-    [Header("Bullet available")]
-    private Dictionary<Color, int> absorbedBullets = new();
+    [Header("---------Bullet available---------")]
+    public Dictionary<CharacterColor, int> AbsorbBullettDict = new();
 
+    [Header("---------Check Player is Gray Color?---------")]
     public bool isGray = true;
-    public Dictionary<Color, int> ammoCount = new();
+
+    [Header("---------Player---------")]
+    [SerializeField] private Player player;
+
+    public float bulletForce = 500.0f;
 
     protected override void Start()
     {
@@ -26,6 +31,8 @@ public class PlayerController : CharacterBase
 
     void Update()
     {
+        if (isDead)
+            return;
         InputControl();
         FlipController();
         TestShoot();
@@ -83,66 +90,54 @@ public class PlayerController : CharacterBase
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            GameObject g = ObjectPool.Instance.GetObject(bulletPrefab);
-            g.transform.position = shootPoint.position;
+            if (!isGray && AbsorbBullettDict[currentColor] > 0)
+            {
+                AbsorbBullettDict[currentColor]--;
+                SpawnBullet();
 
-            float dir = character_dir;
-            g.transform.rotation = Quaternion.Euler(0, (dir == 1 ? 0 : -180), 0);
-
-            BulletBase bulletBase = g.GetComponent<BulletBase>();
-            bulletBase.SetBulletColor(currentColor);
-            bulletBase.ChangeBulletColor();
-
-            g.SetActive(true);
-
-            g.GetComponent<Rigidbody2D>().AddForce(_speedBullet * (dir == 1 ? Vector2.right : Vector2.left));
-
-            _shootTimeCount = _shootTime;
+                if (AbsorbBullettDict[currentColor] <= 0)
+                {
+                    currentColor = CharacterColor.GRAY;
+                    isGray = true;
+                    UpdatePlayerColor();
+                }
+            }
         }
     }
 
-    public void AbsorbBullet(Color bulletColor)
+    private void SpawnBullet()
     {
-        if (currentColor == null)
-        {
-            currentColor = bulletColor;
-        }
-        else if (currentColor != bulletColor)
-        {
-            HandleGameOver(); // Ham nay xu ly trong GameManager, nhung tam thoi de o day
-            return;
-        }
+        GameObject g = ObjectPool.Instance.GetObject(bulletPrefab);
+        g.transform.position = shootPoint.position;
 
-        if (absorbedBullets.ContainsKey(bulletColor))
-        {
-            absorbedBullets[bulletColor]++;
-        }
-        else
-        {
-            absorbedBullets[bulletColor] = 1;
-        }
+        float dir = character_dir;
+        g.transform.rotation = Quaternion.Euler(0, (dir == 1 ? 0 : -180), 0);
+
+        BulletBase bulletBase = g.GetComponent<BulletBase>();
+        bulletBase.SetBulletColor(currentColor);
+        bulletBase.ChangeBulletColor();
+        g.SetActive(true);
+
+        bulletBase._rigid.AddForce(bulletForce * this.transform.right);
+
+        _shootTimeCount = _shootTime;
     }
-
-    private void HandleGameOver()
-    {
-        Debug.Log("Game Over! You absorbed a different color.");
-    }
-
-    ///
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag(GameConstants.enemyBullet))
         {
-            TakeDamage(collision.GetComponent<BulletBase>().bulletColor);
+            TakeDamage(collision.GetComponent<EnemyBulletController>().bulletColor);
             collision.gameObject.SetActive(false);
         }
     }
 
-    void TakeDamage(Color bulletColor)
+    void TakeDamage(CharacterColor bulletColor)
     {
+        if (isDead)
+            return;
         if (isGray)
         {
             AbsorbBullett(bulletColor);
@@ -150,47 +145,54 @@ public class PlayerController : CharacterBase
         else if (bulletColor != currentColor)
         {
             DecreaseHealth();
-            if (lives == 0)
+            if (player.health == 0)
             {
                 Die();
                 return;
             }
-            currentColor = bulletColor;
-            UpdatePlayerColor();
+            AbsorbBullett(bulletColor);
         }
         else
         {
-            ammoCount[bulletColor]++;
+            AbsorbBullettDict[bulletColor]++;
         }
     }
-    
+
+    protected void DecreaseHealth() => player.health--;
+
+    protected void IncreaseHealth() => player.health++;
+
     private void Die()
     {
+        GameEvent.OnDeadEvent?.Invoke();
+        isDead = true;
         Debug.Log("You are dead!!!");
+        Time.timeScale = 0;
     }
 
-    void AbsorbBullett(Color bulletColor)
+    void AbsorbBullett(CharacterColor bulletColor)
     {
+        AbsorbBullettDict.Clear();
         isGray = false;
         currentColor = bulletColor;
-        ammoCount[bulletColor] = 1;
+        //AbsorbBullettDict[bulletColor] = 1;
+        AbsorbBullettDict.Add(currentColor, 1);
         UpdatePlayerColor();
     }
 
     void UpdatePlayerColor()
     {
-        // Update sprite or material color
-        GetComponent<SpriteRenderer>().color = currentColor;
+        GetComponent<SpriteRenderer>().color = ColorData.GetColor(currentColor);
     }
 
     void FireBullet()
     {
-        if (!isGray && ammoCount[currentColor] > 0)
+        if (!isGray && AbsorbBullettDict[currentColor] > 0)
         {
-            ammoCount[currentColor]--;
-            if (ammoCount[currentColor] <= 0)
+            AbsorbBullettDict[currentColor]--;
+            if (AbsorbBullettDict[currentColor] <= 0)
             {
-                currentColor = Color.gray;
+                currentColor = CharacterColor.GRAY;
                 isGray = true;
                 UpdatePlayerColor();
             }

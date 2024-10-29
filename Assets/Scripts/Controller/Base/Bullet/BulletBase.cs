@@ -16,11 +16,11 @@ public class BulletBase : MonoBehaviour
     [SerializeField] float _lifeTime = 5.0f;
     internal Rigidbody2D _rigid;
     internal SpriteRenderer _renderer;
-    public Color bulletColor;
+    public CharacterColor bulletColor;
+    [HideInInspector] public bool isBulletPlayer = false;
 
     private void Awake()
     {
-        //color = CharacterBase.getCharactorColor();
         _rigid = GetComponent<Rigidbody2D>();
         _renderer = GetComponent<SpriteRenderer>();
     }
@@ -32,7 +32,7 @@ public class BulletBase : MonoBehaviour
 
     void Update()
     {
-        //_rigid.velocity = _speed * Time.deltaTime * this.transform.right;
+        
     }
 
     protected void HideBullet()
@@ -64,14 +64,13 @@ public class BulletBase : MonoBehaviour
         //    Destroy(collision.gameObject);
     }
 
-    public void SetBulletColor(Color color)
+    public void SetBulletColor(CharacterColor color)
     {
         this.bulletColor = color;
     }
 
     public void ChangeBulletColor()
     {
-        if (bulletColor != null)
-            GetComponent<SpriteRenderer>().color = bulletColor;
+        GetComponent<SpriteRenderer>().color = ColorData.GetColor(bulletColor);
     }
 }

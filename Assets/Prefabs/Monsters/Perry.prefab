@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2940837633049602465}
   - component: {fileID: 585054834629430541}
   - component: {fileID: 1196470949677330340}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Perry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &585054834629430541
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -176,7 +176,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3476913579185864375}
   - component: {fileID: 471463411101070265}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
