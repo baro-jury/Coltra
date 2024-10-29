@@ -27,7 +27,7 @@ public class BulletBase : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -71,6 +71,6 @@ public class BulletBase : MonoBehaviour
 
     public void ChangeBulletColor()
     {
-        GetComponent<SpriteRenderer>().color = ColorData.GetColor(bulletColor);
+        _renderer.color = ColorData.GetColor(bulletColor);
     }
 }
