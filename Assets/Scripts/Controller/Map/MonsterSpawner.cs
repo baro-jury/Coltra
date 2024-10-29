@@ -5,11 +5,13 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
+    public CharacterColor characterColor;
     public float delaySpawnTime;
     public PlayerController player;
     private float timer;
     private bool isSpawned;
     private GameObject monster;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +19,9 @@ public class MonsterSpawner : MonoBehaviour
         timer = 0;
 
         monster = Instantiate(monsterPrefab, transform);
-        monster.GetComponent<MonsterController>().target = player;
+        var monsterCtrl = monster.GetComponent<MonsterController>();
+        monsterCtrl.target = player;
+        monsterCtrl.spriteRenderer.color = ColorData.GetColor(characterColor);
         monster.SetActive(false);
     }
 

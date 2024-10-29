@@ -45,9 +45,14 @@ public class MonsterController : MonoBehaviour
     public float liveTime;
     private float timer;
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+
         rb2D = GetComponent<Rigidbody2D>();
 
         InitColors();
@@ -62,9 +67,9 @@ public class MonsterController : MonoBehaviour
 
     void InitColors()
     {
-        characterColor = ColorData.GetRandomColor();
-        Color color = ColorData.GetColor(characterColor);
-        spriteRenderer.color = color;
+        //characterColor = ColorData.GetRandomColor();
+        //Color color = ColorData.GetColor(characterColor);
+        //spriteRenderer.color = color;
 
         //var list = GameManager.instance.colorData.colorList;
         //spriteRenderer.color = list[Random.Range(0, list.Count)];
@@ -102,7 +107,7 @@ public class MonsterController : MonoBehaviour
     {
         Vector2 velocity = moveDirection.normalized * monster.velocity;
         rb2D.velocity = velocity;
-        
+
         RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, moveDirection.normalized, obstacleDistance, obstacleLayers);
         if (hitObstacle.collider != null)
         {
