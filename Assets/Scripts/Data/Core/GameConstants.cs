@@ -5,4 +5,5 @@ using UnityEngine;
 public static class GameConstants
 {
     public static string oneWayPlatform = "OneWayPlatform";
+    public static string enemyBullet = "EnemyBullet";
 }
