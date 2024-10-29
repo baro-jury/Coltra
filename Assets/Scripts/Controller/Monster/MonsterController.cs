@@ -45,9 +45,14 @@ public class MonsterController : MonoBehaviour
     public float liveTime;
     private float timer;
 
-    void Start()
+    void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Start()
+    {
+        
         rb2D = GetComponent<Rigidbody2D>();
 
         InitColors();

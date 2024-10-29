@@ -6,6 +6,7 @@ public class MonsterSpawner : MonoBehaviour
 {
     public GameObject monsterPrefab;
     public float delaySpawnTime;
+    public CharacterColor color;
     public PlayerController player;
     private float timer;
     private bool isSpawned;
@@ -17,7 +18,9 @@ public class MonsterSpawner : MonoBehaviour
         timer = 0;
 
         monster = Instantiate(monsterPrefab, transform);
-        monster.GetComponent<MonsterController>().target = player;
+        var monsterCtrl = monster.GetComponent<MonsterController>();
+        monsterCtrl.target = player;
+        monsterCtrl.spriteRenderer.color = ColorData.GetColor(color);
         monster.SetActive(false);
     }
 
