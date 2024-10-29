@@ -62,9 +62,9 @@ public class MonsterController : MonoBehaviour
 
     void InitColors()
     {
-        characterColor = ColorData.GetRandomColor();
-        Color color = ColorData.GetColor(characterColor);
-        spriteRenderer.color = color;
+        //characterColor = ColorData.GetRandomColor();
+        //Color color = ColorData.GetColor(characterColor);
+        //spriteRenderer.color = color;
 
         //var list = GameManager.instance.colorData.colorList;
         //spriteRenderer.color = list[Random.Range(0, list.Count)];
