@@ -41,6 +41,9 @@ public class MonsterController : MonoBehaviour
     [Header("---------- Stats ----------")]
     [SerializeField] private int currentHP;
 
+    [Header("---------- Color ----------")]
+    public CharacterColor characterColor;
+
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -56,8 +59,12 @@ public class MonsterController : MonoBehaviour
 
     void InitColors()
     {
-        var list = GameManager.instance.colorData.colorList;
-        spriteRenderer.color = list[Random.Range(0, list.Count)];
+       characterColor = ColorData.GetRandomColor();
+        Color color = ColorData.GetColor(characterColor);
+        spriteRenderer.color = color;
+
+        //var list = GameManager.instance.colorData.colorList;
+        //spriteRenderer.color = list[Random.Range(0, list.Count)];
     }
 
     void InitForAttack()
@@ -131,6 +138,10 @@ public class MonsterController : MonoBehaviour
             bullet.transform.position = attackPoint.position;
             float rotateValue = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
             bullet.transform.rotation = Quaternion.Euler(0, 0, rotateValue + (int)bulletCtrl.spriteDirection);
+
+            if (spriteRenderer.color != null)
+                bulletCtrl.SetBulletColor(characterColor);
+
             bullet.SetActive(true);
             bulletCtrl._rigid.AddForce(direction.normalized * bulletForce);
         }

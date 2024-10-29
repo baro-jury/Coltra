@@ -121,8 +121,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteDirection: 0
+  bulletSpeed: 500
+  bulletForce: 1
   _lifeTime: 5
-  bulletColor: {r: 0, g: 0, b: 0, a: 0}
+  bulletColor: 0
+  isBulletPlayer: 0
 --- !u!61 &5199728727458353651
 BoxCollider2D:
   m_ObjectHideFlags: 0

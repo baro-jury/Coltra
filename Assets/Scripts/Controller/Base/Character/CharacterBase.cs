@@ -2,22 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharacterColor
-{
-    GRAY,
-    RED,
-    ORANGE,
-    YELLOW,
-    GREEN,
-    BLUE,
-    PURPLE_BOLD,
-    PURPLE,
-}
 
 public class CharacterBase : MonoBehaviour
 {
     #region Components
-    [Header("Components")]
+    [Header("---------Components---------")]
     protected Rigidbody2D rb;
     protected BoxCollider2D collid;
     protected GameObject currentOneWayPlatform;
@@ -25,20 +14,22 @@ public class CharacterBase : MonoBehaviour
     #endregion
 
     #region Movement
-    [Header("Movement")]
+    [Header("---------Movement---------")]
     public float speed = 200.0f;
     public float jumpForce = 18.0f;
     #endregion
 
     #region Ground Check
-    [Header("Ground Check")]
+    [Header("---------Ground Check---------")]
     [SerializeField] protected LayerMask groundLayer;
     [SerializeField] protected Transform groundCheck;
     #endregion
 
-    [Header("Color")]
-    public Color currentColor = Color.gray;
-    public int lives = 3;
+    [Header("---------Color---------")]
+    public CharacterColor currentColor = CharacterColor.GRAY;
+
+    [Header("Stats")]
+    public bool isDead = false;
 
     [HideInInspector] public int character_dir = 1; // Huong cua nhan vat, de tinh toan huong cua vien dan
     protected bool facing_right = true;
@@ -47,22 +38,6 @@ public class CharacterBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         collid = GetComponent<BoxCollider2D>();
-    }
-
-    void InitColors()
-    {
-        var list = GameManager.instance.colorData.colorList;
-        
-    }
-
-    protected void DecreaseHealth()
-    {
-        lives--;
-    }
-
-    protected void IncreaseHealth()
-    {
-        lives++;
     }
 
 

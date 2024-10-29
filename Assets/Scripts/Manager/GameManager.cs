@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
         }
         else if (instance != this)
         {
@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         MakeSingleInstance();
     }
+
 
     public ColorData colorData;
 
