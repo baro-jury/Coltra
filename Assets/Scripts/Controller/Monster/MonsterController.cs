@@ -70,7 +70,7 @@ public class MonsterController : MonoBehaviour
             for (int i = 0; i < amountBulletsToPool; i++)
             {
                 temp = Instantiate(bulletPrefab, pool);
-                temp.GetComponent<EnemyBullet>().spriteRenderer.color = spriteRenderer.color;
+                temp.GetComponent<EnemyBulletController>()._renderer.color = spriteRenderer.color;
                 temp.SetActive(false);
                 bulletPool.Add(temp);
             }
@@ -125,14 +125,14 @@ public class MonsterController : MonoBehaviour
     void ShootBullet(Vector2 direction)
     {
         GameObject bullet = GetPooledBullet();
+        var bulletCtrl = bullet.GetComponent<EnemyBulletController>();
         if (bullet != null)
         {
             bullet.transform.position = attackPoint.position;
             float rotateValue = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
-            bullet.transform.rotation = Quaternion.Euler(0, 0, rotateValue + (int)bullet.GetComponent<BulletController>().spriteDirection);
+            bullet.transform.rotation = Quaternion.Euler(0, 0, rotateValue + (int)bulletCtrl.spriteDirection);
             bullet.SetActive(true);
-            print(bulletForce);
-            bullet.GetComponent<Rigidbody2D>().AddForce(direction.normalized * bulletForce);
+            bulletCtrl._rigid.AddForce(direction.normalized * bulletForce);
         }
     }
 

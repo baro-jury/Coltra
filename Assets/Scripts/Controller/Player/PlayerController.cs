@@ -9,6 +9,7 @@ public class PlayerController : CharacterBase
     [Header("Shoot")]
     public Transform shootPoint;
     public GameObject bulletPrefab;
+    [SerializeField] internal float _speedBullet = 500.0f;
     [SerializeField] private float _shootTime;
     float _shootTimeCount = 0;
 
@@ -31,7 +32,7 @@ public class PlayerController : CharacterBase
     {
         inputX = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             Jump();
         }
@@ -79,7 +80,7 @@ public class PlayerController : CharacterBase
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) || Input.GetMouseButtonDown(0))
         {
             GameObject g = ObjectPool.Instance.GetObject(bulletPrefab);
             g.transform.position = shootPoint.position;
@@ -88,6 +89,8 @@ public class PlayerController : CharacterBase
             g.transform.rotation = Quaternion.Euler(0, (dir == 1 ? 0 : -180), 0);
 
             g.SetActive(true);
+
+            g.GetComponent<Rigidbody2D>().AddForce(_speedBullet * (dir == 1 ? Vector2.right : Vector2.left));
 
             _shootTimeCount = _shootTime;
         }
