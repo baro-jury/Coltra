@@ -23,7 +23,9 @@ public class MonsterController : MonoBehaviour
 
     [Header("---------- Movement ----------")]
     public SpriteDirection spriteDirection;
-    internal Vector2 direction;
+    public LayerMask obstacleLayers;
+    public float obstacleDistance;
+    internal Vector2 moveDirection;
 
     [Header("---------- Attack ----------")]
     public GameObject bulletPrefab;
@@ -38,11 +40,10 @@ public class MonsterController : MonoBehaviour
     protected float lastTimeAttack;
     protected bool isAttacking;
 
-    [Header("---------- Stats ----------")]
-    [SerializeField] private int currentHP;
-
-    [Header("---------- Color ----------")]
+    [Header("---------- State ----------")]
     public CharacterColor characterColor;
+    public float liveTime;
+    private float timer;
 
     void Start()
     {
@@ -52,7 +53,8 @@ public class MonsterController : MonoBehaviour
         InitColors();
         //target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
-        direction = new Vector2(target.transform.position.x - transform.position.x, 0);
+        moveDirection = new Vector2(target.transform.position.x - transform.position.x, 0);
+        timer = 0;
 
         InitForAttack();
 
@@ -88,6 +90,7 @@ public class MonsterController : MonoBehaviour
     void Update()
     {
         MonsterAttack();
+        MonsterState();
     }
 
     void FixedUpdate()
@@ -97,8 +100,15 @@ public class MonsterController : MonoBehaviour
 
     void MonsterMove()
     {
-        Vector2 velocity = direction.normalized * monster.velocity;
+        Vector2 velocity = moveDirection.normalized * monster.velocity;
         rb2D.velocity = velocity;
+        
+        RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, moveDirection.normalized, obstacleDistance, obstacleLayers);
+        if (hitObstacle.collider != null)
+        {
+            moveDirection = new Vector2(target.transform.position.x - transform.position.x, 0);
+            rb2D.velocity = velocity * -1;
+        }
 
         Flip(rb2D.velocity.x);
     }
@@ -126,7 +136,7 @@ public class MonsterController : MonoBehaviour
     void RangedAttack()
     {
         Vector2 shootDir = target.transform.position - attackPoint.position;
-        if (shootDir.x * direction.x <= 0) return;
+        if (shootDir.x * moveDirection.x <= 0) return;
         ShootBullet(shootDir);
     }
 
@@ -185,5 +195,14 @@ public class MonsterController : MonoBehaviour
     private bool IsDead()
     {
         return monster.health == 0;
+    }
+
+    void MonsterState()
+    {
+        timer += Time.deltaTime;
+        if (timer > liveTime)
+        {
+            Destroy(gameObject);
+        }
     }
 }
