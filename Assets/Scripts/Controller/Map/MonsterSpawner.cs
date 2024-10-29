@@ -15,6 +15,7 @@ public class MonsterSpawner : MonoBehaviour
     void Start()
     {
         timer = 0;
+
         monster = Instantiate(monsterPrefab, transform);
         monster.GetComponent<MonsterController>().target = player;
         monster.SetActive(false);
