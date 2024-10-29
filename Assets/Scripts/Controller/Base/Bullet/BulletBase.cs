@@ -13,6 +13,7 @@ public class BulletBase : MonoBehaviour
     {
         //color = CharacterBase.getCharactorColor();
     }
+
     void Start()
     {
         _rigid = this.GetComponent<Rigidbody2D>();

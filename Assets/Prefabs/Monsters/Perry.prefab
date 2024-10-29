@@ -96,14 +96,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7946359962826834987}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
@@ -156,18 +156,14 @@ MonoBehaviour:
   monster:
     health: 1
     velocity: 3
-  colorData: {fileID: 11400000, guid: 8d44df4bce335bc4d92eb7e0bd1a9fc0, type: 2}
+  target: {fileID: 0}
   spriteDirection: -1
-  obstacleLayers:
-    serializedVersion: 2
-    m_Bits: 0
+  bulletPrefab: {fileID: 6510611370532917505, guid: ac988e9c589557044b9ce5e37f82cf1f, type: 3}
   bulletPool: []
-  bullet: {fileID: 0}
-  amountBulletsToPool: 0
-  attackPoint: {fileID: 0}
-  attacksPerSec: 0
-  minimumDistanceAttack: 0
-  bulletForce: 0
+  amountBulletsToPool: 10
+  attackPoint: {fileID: 3476913579185864375}
+  attacksPerSec: 0.33333334
+  bulletForce: 500
   meleeDamage: 1
   currentHP: 0
 --- !u!1 &8578355755531340853
@@ -181,7 +177,7 @@ GameObject:
   - component: {fileID: 3476913579185864375}
   - component: {fileID: 471463411101070265}
   m_Layer: 0
-  m_Name: Isometric Diamond
+  m_Name: AttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
