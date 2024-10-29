@@ -11,7 +11,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Wall
   - Water
   - UI
   - Player
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 768156585
+    locked: 0
+  - name: Canvas
+    uniqueID: 2239768795
     locked: 0
