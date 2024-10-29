@@ -27,7 +27,7 @@ public class BulletBase : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
@@ -71,7 +71,6 @@ public class BulletBase : MonoBehaviour
 
     public void ChangeBulletColor()
     {
-        if (bulletColor != null)
-            GetComponent<SpriteRenderer>().color = bulletColor;
+        if (bulletColor != null) _renderer.color = bulletColor;
     }
 }
