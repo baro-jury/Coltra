@@ -11,7 +11,7 @@ public class HomeController : Singleton<HomeController>
     [Header("---------- Audio ----------")]
     public AudioClip musicHome;
     public AudioClip clickButtonClip;
-    public AudioClip switchClip;
+    public AudioClip gameStartClip;
 
     [Header("---------- Button ----------")]
     public Button btnPlay;
@@ -33,7 +33,6 @@ public class HomeController : Singleton<HomeController>
     [Header("---------- Text ----------")]
     public Text levelText;
 
-    // Start is called before the first frame update
     void Start()
     {
         panelObjList.Add(panelMenu);
@@ -107,7 +106,7 @@ public class HomeController : Singleton<HomeController>
     void TurnOnSound()
     {
         AudioManager.instance.soundSource.mute = false;
-        AudioManager.instance.soundSource.PlayOneShot(switchClip);
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         btnSoundOff.gameObject.SetActive(false);
     }
 
@@ -119,14 +118,14 @@ public class HomeController : Singleton<HomeController>
 
     void TurnOnMusic()
     {
-        AudioManager.instance.soundSource.PlayOneShot(switchClip);
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         AudioManager.instance.musicSource.mute = false;
         btnMusicOff.gameObject.SetActive(false);
     }
 
     void TurnOffMusic()
     {
-        AudioManager.instance.soundSource.PlayOneShot(switchClip);
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         AudioManager.instance.musicSource.mute = true;
         btnMusicOff.gameObject.SetActive(true);
     }
@@ -139,7 +138,7 @@ public class HomeController : Singleton<HomeController>
 
     void JoinGame()
     {
-        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
+        AudioManager.instance.soundSource.PlayOneShot(gameStartClip);
         SceneManager.LoadScene("Level 1");
     }
 }

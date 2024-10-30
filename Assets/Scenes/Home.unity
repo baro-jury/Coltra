@@ -394,7 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicHome: {fileID: 8300000, guid: 8a64fb5e82705ec4ab9c404c8008f4f7, type: 3}
   clickButtonClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
-  switchClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
+  gameStartClip: {fileID: 8300000, guid: 96cd124da8be63041ad9c4a402e7f445, type: 3}
   btnPlay: {fileID: 95468070}
   btnSetting: {fileID: 1789549623}
   btnSoundOff: {fileID: 1754420724}
