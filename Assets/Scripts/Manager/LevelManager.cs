@@ -52,6 +52,7 @@ public class LevelManager : Singleton<LevelManager>
     private void CompleteLevel()
     {
         Debug.Log("Level Completed!");
+        SceneController.Instance.NextLevel();
     }
 
 }
