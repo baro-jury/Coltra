@@ -392,8 +392,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f412b45c236c0284baac45def5a50968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clickButtonClip: {fileID: 0}
-  switchClip: {fileID: 0}
+  musicHome: {fileID: 8300000, guid: 8a64fb5e82705ec4ab9c404c8008f4f7, type: 3}
+  clickButtonClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
+  switchClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
   btnPlay: {fileID: 95468070}
   btnSetting: {fileID: 1789549623}
   btnSoundOff: {fileID: 1754420724}
@@ -719,7 +720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &552076824
 RectTransform:
   m_ObjectHideFlags: 0
@@ -796,7 +797,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &564515087
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1812,7 +1813,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d3109fd472283d4dbd0bbdf77b0b124, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  closeClip: {fileID: 0}
+  closeClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
 --- !u!114 &1232476857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2808,9 +2809,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -3086,7 +3087,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3094,12 +3095,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 70f4b7b1f53157b41880bf8cf52505cd, type: 3}
     m_FontSize: 14
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 60
+    m_MaxSize: 80
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
