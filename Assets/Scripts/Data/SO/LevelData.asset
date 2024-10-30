@@ -17,3 +17,19 @@ MonoBehaviour:
     enemyData:
     - characterColor: 1
       quanity: 1
+  - level: 2
+    enemyData:
+    - characterColor: 2
+      quanity: 1
+  - level: 3
+    enemyData:
+    - characterColor: 3
+      quanity: 1
+  - level: 4
+    enemyData:
+    - characterColor: 4
+      quanity: 1
+  - level: 5
+    enemyData:
+    - characterColor: 5
+      quanity: 1
