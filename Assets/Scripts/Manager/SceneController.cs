@@ -7,7 +7,11 @@ public class SceneController : Singleton<SceneController>
 {
     public void NextLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        int currentIndex = SceneManager.GetActiveScene().buildIndex;
+        if (currentIndex < SceneManager.sceneCountInBuildSettings - 1)
+            SceneManager.LoadScene(currentIndex + 1);
+        else
+            Debug.Log("Ban da pha dao game!!!");
     }
 
     public void LoadScene(string sceneName)
