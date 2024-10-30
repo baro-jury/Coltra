@@ -9,6 +9,7 @@ public class HomeController : Singleton<HomeController>
     private List<GameObject> panelObjList = new List<GameObject>();
 
     [Header("---------- Audio ----------")]
+    public AudioClip musicHome;
     public AudioClip clickButtonClip;
     public AudioClip switchClip;
 
@@ -42,6 +43,8 @@ public class HomeController : Singleton<HomeController>
 
         AudioManager.instance.soundSource.mute = false;
         AudioManager.instance.musicSource.mute = false;
+        AudioManager.instance.musicSource.clip = musicHome;
+        AudioManager.instance.musicSource.Play();
         btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);
         btnMusicOff.gameObject.SetActive(AudioManager.instance.musicSource.mute);
         tabSetting.SetActive(false);
@@ -90,11 +93,13 @@ public class HomeController : Singleton<HomeController>
 
     void PlayGame()
     {
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         ShowPanel(panelMap);
     }
 
     void Setting()
     {
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         tabSetting.SetActive(true);
     }
 
@@ -126,14 +131,15 @@ public class HomeController : Singleton<HomeController>
         btnMusicOff.gameObject.SetActive(true);
     }
 
-
     void BackToMenu()
     {
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         ShowPanel(panelMenu);
     }
 
     void JoinGame()
     {
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         SceneManager.LoadScene("Level 1");
     }
 }
