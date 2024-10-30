@@ -41,9 +41,10 @@ public class MonsterController : MonoBehaviour
     protected bool isAttacking;
 
     [Header("---------- State ----------")]
-    public CharacterColor characterColor;
     public float liveTime;
     private float timer;
+
+    public CharacterColor bulletColor;
 
     void Awake()
     {
@@ -85,7 +86,8 @@ public class MonsterController : MonoBehaviour
             for (int i = 0; i < amountBulletsToPool; i++)
             {
                 temp = Instantiate(bulletPrefab, pool);
-                temp.GetComponent<EnemyBulletController>()._renderer.color = spriteRenderer.color;
+                //temp.GetComponent<EnemyBulletController>()._renderer.color = spriteRenderer.color;
+                temp.GetComponent<EnemyBulletController>()._renderer.color = ColorData.GetColor(bulletColor);
                 temp.SetActive(false);
                 bulletPool.Add(temp);
             }
@@ -156,7 +158,7 @@ public class MonsterController : MonoBehaviour
             bullet.transform.rotation = Quaternion.Euler(0, 0, rotateValue + (int)bulletCtrl.spriteDirection);
 
             if (spriteRenderer.color != null)
-                bulletCtrl.SetBulletColor(characterColor);
+                bulletCtrl.SetBulletColor(bulletColor);
 
             bullet.SetActive(true);
             bulletCtrl._rigid.AddForce(direction.normalized * bulletForce);
@@ -180,12 +182,12 @@ public class MonsterController : MonoBehaviour
         if (collision.gameObject.CompareTag(GameConstants.playerBullet))
         {
             //DecreaseHealth();
-            if (collision.GetComponent<BulletBase>().bulletColor == characterColor)
+            if (collision.GetComponent<BulletBase>().bulletColor == bulletColor)
                 DecreaseHealth();
             if (IsDead())
             {
                 gameObject.SetActive(false);
-                GameEvent.OnEnemyKill?.Invoke(characterColor);
+                GameEvent.OnEnemyKill?.Invoke(bulletColor);
             }
 
             collision.gameObject.SetActive(false);

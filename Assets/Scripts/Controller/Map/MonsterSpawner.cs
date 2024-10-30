@@ -21,6 +21,7 @@ public class MonsterSpawner : MonoBehaviour
         var monsterCtrl = monster.GetComponent<MonsterController>();
         monsterCtrl.target = player;
         monsterCtrl.spriteRenderer.color = ColorData.GetColor(color);
+        monster.GetComponent<MonsterController>().bulletColor = color;
         monster.SetActive(false);
     }
 
