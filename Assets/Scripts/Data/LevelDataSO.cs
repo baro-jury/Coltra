@@ -26,5 +26,5 @@ public class Level
 public class EnemyData
 {
     public CharacterColor characterColor;
-    public int quanity;
+    public int quantity;
 }
