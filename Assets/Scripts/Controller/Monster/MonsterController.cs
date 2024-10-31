@@ -12,7 +12,7 @@ public class MonsterController : MonoBehaviour
     }
 
     [Header("---------- Monster ----------")]
-    [SerializeField] private Monster monster;
+    [SerializeField] protected Monster monster;
 
     internal SpriteRenderer spriteRenderer;
     internal Rigidbody2D rb2D;
@@ -89,7 +89,7 @@ public class MonsterController : MonoBehaviour
         UpdateAnimation();
     }
 
-    internal void MonsterMove()
+    internal virtual void MonsterMove()
     {
         Vector2 velocity = moveDirection.normalized * monster.velocity;
         rb2D.velocity = velocity;
