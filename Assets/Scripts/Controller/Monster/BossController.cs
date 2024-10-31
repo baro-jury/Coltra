@@ -20,4 +20,17 @@ public class BossController : MonsterController
             }
         }
     }
+
+    internal override void MonsterMove()
+    {
+        Vector2 velocity = moveDirection.normalized * monster.velocity;
+        rb2D.velocity = velocity;
+
+        RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, moveDirection.normalized, obstacleDistance, obstacleLayers);
+        if (hitObstacle.collider != null)
+        {
+            moveDirection = new Vector2(target.transform.position.x - transform.position.x, 0);
+            rb2D.velocity = velocity * -1;
+        }
+    }
 }

@@ -8,7 +8,6 @@ public class LevelDataSO : ScriptableObject
 {
     public List<Level> LevelMission = new();
 
-
     public List<EnemyData> GetEnemyDataByLevel(int level)
     {
         return LevelMission.Find(item => item.level == level).enemyData;

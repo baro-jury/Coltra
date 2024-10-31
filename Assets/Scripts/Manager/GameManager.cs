@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            //DontDestroyOnLoad(this);
+            DontDestroyOnLoad(this);
         }
         else if (instance != this)
         {
@@ -23,9 +23,30 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         MakeSingleInstance();
+        IsFirstTimePlay();
     }
 
+    private const string PROGRESS = "Progress";
+
+    void IsFirstTimePlay()
+    {
+        if (!PlayerPrefs.HasKey("_IsFirstTimePlay"))
+        {
+            PlayerPrefs.SetInt(PROGRESS, 1);
+            PlayerPrefs.SetInt("_IsFirstTimePlay", 0);
+        }
+    }
 
     public ColorData colorData;
+
+    public void SetLevel(int level)
+    {
+        PlayerPrefs.SetInt(PROGRESS, level);
+    }
+
+    public int GetLevel()
+    {
+        return PlayerPrefs.GetInt(PROGRESS);
+    }
 
 }
