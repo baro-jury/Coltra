@@ -36,6 +36,8 @@ public class PlayerController : CharacterBase
         InputControl();
         FlipController();
         PlayerShoot();
+
+        UpdateAnimation();
     }
 
     private void InputControl()
@@ -90,10 +92,12 @@ public class PlayerController : CharacterBase
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
             if (!isGray && AbsorbBullettDict[currentColor] > 0)
             {
+                anim.SetTrigger("IsAttacking");
+
                 AbsorbBullettDict[currentColor]--;
                 SpawnBullet();
 
@@ -136,8 +140,9 @@ public class PlayerController : CharacterBase
 
     void TakeDamage(CharacterColor bulletColor)
     {
-        if (isDead)
-            return;
+        if (isDead) return;
+
+        anim.SetTrigger("IsHurt");
         if (isGray)
         {
             AbsorbBullett(bulletColor);
@@ -166,6 +171,7 @@ public class PlayerController : CharacterBase
     {
         GameEvent.OnPlayerDead?.Invoke();
         isDead = true;
+        anim.SetBool("IsDead", isDead);
         Debug.Log("You are dead!!!");
         Time.timeScale = 0;
     }
@@ -182,5 +188,12 @@ public class PlayerController : CharacterBase
     void UpdatePlayerColor()
     {
         GetComponent<SpriteRenderer>().color = ColorData.GetColor(currentColor);
+    }
+
+    void UpdateAnimation()
+    {
+        anim.SetFloat("xVelocity", rb.velocity.x);
+        anim.SetFloat("yVelocity", rb.velocity.y);
+        //anim.SetBool("IsDead", isDead);
     }
 }

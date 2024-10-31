@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 42562026}
   - component: {fileID: 42562025}
   - component: {fileID: 42562024}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Lane 3
   m_TagString: OneWayPlatform
   m_Icon: {fileID: 0}
@@ -633,7 +633,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicIngame: {fileID: 8300000, guid: 404e6022b8fbb264398523b0395cfe50, type: 3}
   clickButtonClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
-  switchClip: {fileID: 8300000, guid: eb7ee49e8738a8a48a47b0f8bea17101, type: 3}
   btnPause: {fileID: 0}
   btnResume: {fileID: 0}
   btnReplay: {fileID: 0}
@@ -1690,7 +1689,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216908021}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.853322, y: 0, z: 0}
+  m_LocalPosition: {x: -0.8888774, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1973,11 +1972,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8231325192737344137, guid: b4bce4d13310434418bc3e084123cda2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.38
+      value: -0.86
       objectReference: {fileID: 0}
     - target: {fileID: 8231325192737344137, guid: b4bce4d13310434418bc3e084123cda2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: 0.28
       objectReference: {fileID: 0}
     - target: {fileID: 8231325192737344137, guid: b4bce4d13310434418bc3e084123cda2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2122,7 +2121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542828204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.188877, y: -4.46, z: -9.855123}
+  m_LocalPosition: {x: 8.188877, y: -4.0099998, z: -9.855123}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2639,11 +2638,11 @@ MonoBehaviour:
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
-  m_XDamping: 1
+  m_XDamping: 1.5
   m_YDamping: 1
   m_ZDamping: 1
   m_TargetMovementOnly: 1
-  m_ScreenX: 0.3
+  m_ScreenX: 0.5
   m_ScreenY: 0.5
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
