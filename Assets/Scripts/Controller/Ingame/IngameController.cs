@@ -14,10 +14,8 @@ public class IngameController : Singleton<IngameController>
     public Button btnPause;
     public Button btnResume;
     public Button btnReplay;
-    public Button btnSoundOff;
-    public Button btnSoundOn;
-    public Button btnMusicOff;
-    public Button btnMusicOn;
+    public Button btnSound;
+    public Button btnMusic;
     public Button btnHome;
 
     [Header("---------- Panel ----------")]
@@ -29,7 +27,10 @@ public class IngameController : Singleton<IngameController>
     [Header("---------- Text ----------")]
     public Text levelText;
 
-    void Start()
+    private bool soundToggle = true;
+    private bool musicToggle = true;
+
+    void Awake()
     {
         AudioManager.instance.musicSource.clip = musicIngame;
         AudioManager.instance.musicSource.Play();
@@ -40,14 +41,22 @@ public class IngameController : Singleton<IngameController>
 
         //RemoveButtonListener(btnPause, btnResume, btnReplay, btnSoundOff, btnSoundOn, btnMusicOff, btnMusicOn, btnHome);
 
-        //btnPause.onClick.AddListener(Pause);
-        //btnResume.onClick.AddListener(Resume);
-        //btnReplay.onClick.AddListener(Replay);
-        //btnSoundOff.onClick.AddListener(TurnOnSound);
-        //btnSoundOn.onClick.AddListener(TurnOffSound);
-        //btnMusicOff.onClick.AddListener(TurnOnMusic);
-        //btnMusicOn.onClick.AddListener(TurnOffMusic);
-        //btnHome.onClick.AddListener(GoHome);
+        btnPause.onClick.AddListener(Pause);
+        btnResume.onClick.AddListener(Resume);
+        btnReplay.onClick.AddListener(Replay);
+        btnSound.onClick.AddListener(TurnToggleSound);
+        btnMusic.onClick.AddListener(TurnToggleMusic);
+        btnHome.onClick.AddListener(GoHome);
+    }
+
+    private void OnDestroy()
+    {
+        btnPause.onClick.RemoveAllListeners();
+        btnResume.onClick.RemoveAllListeners();
+        btnReplay.onClick.RemoveAllListeners();
+        btnSound.onClick.RemoveAllListeners();
+        btnMusic.onClick.RemoveAllListeners();
+        btnHome.onClick.RemoveAllListeners();
     }
 
     private void RemoveButtonListener(params Button[] buttons)
@@ -76,39 +85,56 @@ public class IngameController : Singleton<IngameController>
     {
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
     }
 
     public void GoHome()
     {
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         SceneManager.LoadScene("Home");
+        Time.timeScale = 1;
     }
 
-    void TurnOnSound()
+    void TurnToggleSound()
     {
-        AudioManager.instance.soundSource.mute = false;
+        soundToggle = !soundToggle;
+        AudioManager.instance.soundSource.mute = soundToggle;
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        btnSoundOff.gameObject.SetActive(false);
+        btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
     }
-
-    void TurnOffSound()
+    void TurnToggleMusic()
     {
-        AudioManager.instance.soundSource.mute = true;
-        btnSoundOff.gameObject.SetActive(true);
-    }
-
-    void TurnOnMusic()
-    {
+        musicToggle = !musicToggle;
+        AudioManager.instance.soundSource.mute = musicToggle;
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        AudioManager.instance.musicSource.mute = false;
-        btnMusicOff.gameObject.SetActive(false);
+        btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
     }
 
-    void TurnOffMusic()
-    {
-        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        AudioManager.instance.musicSource.mute = true;
-        btnMusicOff.gameObject.SetActive(true);
-    }
+    //void TurnOnSound()
+    //{
+    //    AudioManager.instance.soundSource.mute = false;
+    //    AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
+    //    btnSoundOff.gameObject.SetActive(false);
+    //}
+
+    //void TurnOffSound()
+    //{
+    //    AudioManager.instance.soundSource.mute = true;
+    //    btnSoundOff.gameObject.SetActive(true);
+    //}
+
+    //void TurnOnMusic()
+    //{
+    //    AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
+    //    AudioManager.instance.musicSource.mute = false;
+    //    btnMusicOff.gameObject.SetActive(false);
+    //}
+
+    //void TurnOffMusic()
+    //{
+    //    AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
+    //    AudioManager.instance.musicSource.mute = true;
+    //    btnMusicOff.gameObject.SetActive(true);
+    //}
 
 }

@@ -183,9 +183,9 @@ MonoBehaviour:
   amountBulletsToPool: 10
   attackPoint: {fileID: 3476913579185864375}
   attacksPerSec: 0.33333334
-  bulletForce: 500
+  bulletForce: 300
   meleeDamage: 1
-  liveTime: 10
+  liveTime: 60
   bulletColor: 0
 --- !u!1 &8578355755531340853
 GameObject:
