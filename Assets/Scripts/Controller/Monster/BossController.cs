@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class BossController : MonsterController
 {
+    [Header("---------- Stats ----------")]
+    [SerializeField] private int maxHP;
+
+    protected override void InitStats()
+    {
+        maxHP = monster.health;
+        IngameController.Instance.panelBoss.SetActive(true);
+        IngameController.Instance.SetBossHP(monster.health, maxHP);
+    }
+
     protected override void InitForAttack()
     {
         if (bulletPrefab != null)
@@ -35,6 +45,12 @@ public class BossController : MonsterController
         Flip(rb2D.velocity.x);
     }
 
+    protected override void DecreaseHealth()
+    {
+        base.DecreaseHealth();
+        IngameController.Instance.SetBossHP(monster.health, maxHP);
+    }
+
     internal override void MonsterState()
     {
         
@@ -43,5 +59,21 @@ public class BossController : MonsterController
     protected override void UpdateAnimation()
     {
 
+    }
+
+    protected override void TriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag(GameConstants.playerBullet))
+        {
+            DecreaseHealth();
+            if (IsDead())
+            {
+                IngameController.Instance.panelBoss.SetActive(false);
+                gameObject.SetActive(false);
+                GameEvent.OnEnemyKill?.Invoke(bulletColor);
+            }
+
+            collision.gameObject.SetActive(false);
+        }
     }
 }

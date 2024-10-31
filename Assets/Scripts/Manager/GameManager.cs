@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
     private const string FIRST_TIME_PLAY = "IsFirstTimePlay";
     private const string PROGRESS = "Progress";
+    private const string SOUND = "Sound";
+    private const string MUSIC = "Music";
 
     void IsFirstTimePlay()
     {
@@ -35,6 +37,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt(FIRST_TIME_PLAY, 0);
             PlayerPrefs.SetInt(PROGRESS, 1);
+            PlayerPrefs.SetInt(SOUND, 1);
+            PlayerPrefs.SetInt(MUSIC, 1);
             PlayerPrefs.Save();
         }
     }
@@ -50,6 +54,28 @@ public class GameManager : MonoBehaviour
     public int GetLevel()
     {
         return PlayerPrefs.GetInt(PROGRESS);
+    }
+
+    public void SetSoundState(bool isTurnedOn)
+    {
+        PlayerPrefs.SetInt(SOUND, isTurnedOn ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public bool GetSoundState()
+    {
+        return PlayerPrefs.GetInt(SOUND) == 1;
+    }
+
+    public void SetMusicState(bool isTurnedOn)
+    {
+        PlayerPrefs.SetInt(MUSIC, isTurnedOn ? 1 : 0);
+        PlayerPrefs.Save();
+    }
+
+    public bool GetMusicState()
+    {
+        return PlayerPrefs.GetInt(MUSIC) == 1;
     }
 
     public void ResetGameData()

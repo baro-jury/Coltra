@@ -47,8 +47,8 @@ public class HomeController : Singleton<HomeController>
 
         ShowPanel(panelMenu);
 
-        AudioManager.instance.soundSource.mute = false;
-        AudioManager.instance.musicSource.mute = false;
+        AudioManager.instance.soundSource.mute = GameManager.instance.GetSoundState();
+        AudioManager.instance.musicSource.mute = GameManager.instance.GetMusicState();
         AudioManager.instance.musicSource.clip = musicHome;
         AudioManager.instance.musicSource.Play();
         btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);
@@ -145,6 +145,7 @@ public class HomeController : Singleton<HomeController>
     void TurnOnSound()
     {
         AudioManager.instance.soundSource.mute = false;
+        GameManager.instance.SetSoundState(false);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         btnSoundOff.gameObject.SetActive(false);
     }
@@ -152,6 +153,7 @@ public class HomeController : Singleton<HomeController>
     void TurnOffSound()
     {
         AudioManager.instance.soundSource.mute = true;
+        GameManager.instance.SetSoundState(true);
         btnSoundOff.gameObject.SetActive(true);
     }
 
@@ -159,6 +161,7 @@ public class HomeController : Singleton<HomeController>
     {
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         AudioManager.instance.musicSource.mute = false;
+        GameManager.instance.SetMusicState(false);
         btnMusicOff.gameObject.SetActive(false);
     }
 
@@ -166,6 +169,7 @@ public class HomeController : Singleton<HomeController>
     {
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         AudioManager.instance.musicSource.mute = true;
+        GameManager.instance.SetMusicState(true);
         btnMusicOff.gameObject.SetActive(true);
     }
     

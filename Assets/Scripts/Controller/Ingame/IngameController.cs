@@ -20,9 +20,8 @@ public class IngameController : Singleton<IngameController>
 
     [Header("---------- Panel ----------")]
     public GameObject panelPause;
-
-    [Header("---------- Tab ----------")]
-    public GameObject tabTutorial;
+    public GameObject panelBoss;
+    public Slider barBossHP;
 
     [Header("---------- Text ----------")]
     public Text levelText;
@@ -30,16 +29,19 @@ public class IngameController : Singleton<IngameController>
     private bool soundToggle = true;
     private bool musicToggle = true;
 
-    void Awake()
+    void Start()
     {
-        AudioManager.instance.musicSource.clip = musicIngame;
-        AudioManager.instance.musicSource.Play();
+        //AudioManager.instance.musicSource.clip = musicIngame;
+        //AudioManager.instance.musicSource.Play();
 
         //btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);
         //btnMusicOff.gameObject.SetActive(AudioManager.instance.musicSource.mute);
-        //tabTutorial.SetActive(false);
 
-        //RemoveButtonListener(btnPause, btnResume, btnReplay, btnSoundOff, btnSoundOn, btnMusicOff, btnMusicOn, btnHome);
+        panelPause.SetActive(false);
+        panelBoss.SetActive(false);
+        barBossHP.wholeNumbers = true;
+
+        RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome);
 
         btnPause.onClick.AddListener(Pause);
         btnResume.onClick.AddListener(Resume);
@@ -99,6 +101,7 @@ public class IngameController : Singleton<IngameController>
     {
         soundToggle = !soundToggle;
         AudioManager.instance.soundSource.mute = soundToggle;
+        GameManager.instance.SetSoundState(soundToggle);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
     }
@@ -106,35 +109,16 @@ public class IngameController : Singleton<IngameController>
     {
         musicToggle = !musicToggle;
         AudioManager.instance.soundSource.mute = musicToggle;
+        GameManager.instance.SetMusicState(musicToggle);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
     }
 
-    //void TurnOnSound()
-    //{
-    //    AudioManager.instance.soundSource.mute = false;
-    //    AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-    //    btnSoundOff.gameObject.SetActive(false);
-    //}
-
-    //void TurnOffSound()
-    //{
-    //    AudioManager.instance.soundSource.mute = true;
-    //    btnSoundOff.gameObject.SetActive(true);
-    //}
-
-    //void TurnOnMusic()
-    //{
-    //    AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-    //    AudioManager.instance.musicSource.mute = false;
-    //    btnMusicOff.gameObject.SetActive(false);
-    //}
-
-    //void TurnOffMusic()
-    //{
-    //    AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-    //    AudioManager.instance.musicSource.mute = true;
-    //    btnMusicOff.gameObject.SetActive(true);
-    //}
+    public void SetBossHP(float curHP, float maxHP)
+    {
+        barBossHP.minValue = 0;
+        barBossHP.maxValue = maxHP;
+        barBossHP.value = curHP;
+    }
 
 }

@@ -62,6 +62,11 @@ public class MonsterController : MonoBehaviour
         timer = 0;
 
         InitForAttack();
+        InitStats();
+    }
+
+    protected virtual void InitStats()
+    {
 
     }
 
@@ -162,11 +167,15 @@ public class MonsterController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        TriggerEnter2D(collision);
+    }
+
+    protected virtual void TriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag(GameConstants.playerBullet))
         {
-            //DecreaseHealth();
-            if (collision.GetComponent<BulletBase>().bulletColor == bulletColor)
-                DecreaseHealth();
+            if (collision.GetComponent<BulletBase>().bulletColor == bulletColor) DecreaseHealth();
+
             if (IsDead())
             {
                 gameObject.SetActive(false);
@@ -177,12 +186,12 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    private void DecreaseHealth()
+    protected virtual void DecreaseHealth()
     {
         monster.health--;
     }
 
-    private bool IsDead()
+    protected bool IsDead()
     {
         return monster.health == 0;
     }

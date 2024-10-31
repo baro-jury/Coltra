@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8c99f5e7ce802be4482d4d4595a0afc4
+guid: 1b9ede809cdc2f64e8438849e7999b11
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -115,6 +115,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: tvOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
