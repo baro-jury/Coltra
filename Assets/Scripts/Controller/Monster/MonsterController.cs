@@ -193,6 +193,8 @@ public class MonsterController : MonoBehaviour
         if (timer > liveTime)
         {
             Destroy(gameObject);
+            Time.timeScale = 0;
+            GameEvent.OnPlayerDead?.Invoke();
         }
     }
 
