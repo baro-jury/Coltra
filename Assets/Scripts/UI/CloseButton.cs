@@ -9,20 +9,11 @@ public class CloseButton : MonoBehaviour
 
     void Start()
     {
-        transform.GetComponent<Button>().onClick.AddListener(_Close);
+        transform.GetComponent<Button>().onClick.AddListener(Close);
     }
 
-    //close in game
-    public void _Close()
+    public void Close()
     {
-        //AudioManager.Instance.soundSource.PlayOneShot(closeClip);
-        //transform.parent.GetComponent<RectTransform>().DOScale(Vector3.zero, .25f).SetEase(Ease.InOutQuad).SetUpdate(true) //gameObject: form
-        //    .OnComplete(() =>
-        //    {
-        //        transform.parent.parent.gameObject.SetActive(false); //panel
-        //        transform.parent.localScale = Vector3.one;
-        //    });
-
         AudioManager.instance.soundSource.PlayOneShot(closeClip);
         transform.parent.gameObject.SetActive(false);
 
