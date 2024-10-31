@@ -17,6 +17,7 @@ public class IngameController : Singleton<IngameController>
     public Button btnSound;
     public Button btnMusic;
     public Button btnHome;
+    public Button btnHomeOver;
 
     [Header("---------- Panel ----------")]
     public GameObject panelPause;
@@ -26,8 +27,11 @@ public class IngameController : Singleton<IngameController>
     [Header("---------- Text ----------")]
     public Text levelText;
 
-    private bool soundToggle = true;
-    private bool musicToggle = true;
+    private bool soundToggle;
+    private bool musicToggle;
+
+    [SerializeField] Sprite checkBg;
+    [SerializeField] Sprite unCheckBg;
 
     void Start()
     {
@@ -43,12 +47,19 @@ public class IngameController : Singleton<IngameController>
 
         RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome);
 
+        soundToggle = !AudioManager.instance.soundSource.mute;
+        musicToggle = !AudioManager.instance.musicSource.mute;
+
+        btnSound.GetComponent<Image>().sprite = soundToggle ? checkBg : unCheckBg;
+        btnMusic.GetComponent<Image>().sprite = musicToggle ? checkBg : unCheckBg;
+
         btnPause.onClick.AddListener(Pause);
         btnResume.onClick.AddListener(Resume);
         btnReplay.onClick.AddListener(Replay);
         btnSound.onClick.AddListener(TurnToggleSound);
         btnMusic.onClick.AddListener(TurnToggleMusic);
         btnHome.onClick.AddListener(GoHome);
+        btnHomeOver.onClick.AddListener(GoHome);
     }
 
     private void OnDestroy()
@@ -59,6 +70,7 @@ public class IngameController : Singleton<IngameController>
         btnSound.onClick.RemoveAllListeners();
         btnMusic.onClick.RemoveAllListeners();
         btnHome.onClick.RemoveAllListeners();
+        btnHomeOver.onClick.RemoveAllListeners();
     }
 
     private void RemoveButtonListener(params Button[] buttons)
@@ -100,18 +112,19 @@ public class IngameController : Singleton<IngameController>
     void TurnToggleSound()
     {
         soundToggle = !soundToggle;
-        AudioManager.instance.soundSource.mute = soundToggle;
-        GameManager.instance.SetSoundState(soundToggle);
+        AudioManager.instance.soundSource.mute = !soundToggle;
+        GameManager.instance.SetSoundState(!soundToggle);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
+        btnSound.GetComponent<Image>().sprite = soundToggle ? checkBg : unCheckBg;
     }
+    
     void TurnToggleMusic()
     {
         musicToggle = !musicToggle;
-        AudioManager.instance.soundSource.mute = musicToggle;
-        GameManager.instance.SetMusicState(musicToggle);
+        AudioManager.instance.soundSource.mute = !musicToggle;
+        GameManager.instance.SetMusicState(!musicToggle);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
+        btnMusic.GetComponent<Image>().sprite = musicToggle ? checkBg : unCheckBg;
     }
 
     public void SetBossHP(float curHP, float maxHP)

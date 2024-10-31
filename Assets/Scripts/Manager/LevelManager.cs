@@ -61,7 +61,7 @@ public class LevelManager : Singleton<LevelManager>
             if (!objectiveInstances.ContainsKey(item.Key))
             {
                 Transform obj = Instantiate(objectivePrefab, objectiveUI.transform);
-                obj.GetChild(0).GetComponent<Image>().sprite = designData.GetItemVisual(item.Key).img;
+                obj.GetChild(0).GetComponent<Image>().color = ColorData.GetColor(item.Key);
                 objectiveInstances[item.Key] = obj;
             }
 
