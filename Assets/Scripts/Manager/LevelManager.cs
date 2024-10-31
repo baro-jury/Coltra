@@ -1,13 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
+using UnityEngine.UI;
 
 public class LevelManager : Singleton<LevelManager>
 {
     [SerializeField] LevelDataSO levelData;
+    [SerializeField] private DesignDataSO designData;
+    [SerializeField] private ObjectiveUI objectiveUI;
+    [SerializeField] private Transform objectivePrefab;
+
+    private List<EnemyDataInstance> currentEnemyDataClone;
+    private List<EnemyData> currentEnemyData;
+    private Dictionary<CharacterColor, Transform> objectiveInstances = new();
 
     private int currentLevel;
-    private List<EnemyData> currentEnemyData;
 
     private void Awake()
     {
@@ -23,24 +32,63 @@ public class LevelManager : Singleton<LevelManager>
     {
         currentLevel = SceneController.Instance.GetCurrentSceneIndex();
         currentEnemyData = levelData.GetEnemyDataByLevel(currentLevel);
+
+        currentEnemyDataClone = new List<EnemyDataInstance>();
+        foreach (var data in currentEnemyData)
+        {
+            currentEnemyDataClone.Add(new EnemyDataInstance(data.characterColor, data.quantity));
+        }
+
+        UpdateObjectiveUI();
     }
 
     public void EnemyKilled(CharacterColor color)
     {
-        EnemyData enemyData = currentEnemyData.Find(data => data.characterColor == color);
+        EnemyDataInstance enemyData = currentEnemyDataClone.Find(data => data.characterColor == color);
         if (enemyData != null)
         {
-            enemyData.quanity--;
+            enemyData.killed++;
 
+            UpdateObjectiveUI();
             CheckMissionProgress();
         }
     }
 
+    public void UpdateProgress(Dictionary<CharacterColor, string> progressData)
+    {
+        foreach (KeyValuePair<CharacterColor, string> item in progressData)
+        {
+            if (!objectiveInstances.ContainsKey(item.Key))
+            {
+                Transform obj = Instantiate(objectivePrefab, objectiveUI.transform);
+                obj.GetChild(0).GetComponent<Image>().sprite = designData.GetItemVisual(item.Key).img;
+                objectiveInstances[item.Key] = obj;
+            }
+
+            objectiveInstances[item.Key].GetChild(1).GetComponent<TextMeshProUGUI>().text = item.Value;
+        }
+    }
+
+    public void UpdateObjectiveUI()
+    {
+        var progressData = new Dictionary<CharacterColor, string>();
+
+        foreach (var enemyData in currentEnemyDataClone)
+        {
+            string progress = $"{enemyData.killed}/{enemyData.quantity}";
+            progressData.Add(enemyData.characterColor, progress);
+        }
+
+        UpdateProgress(progressData);
+    }
+
+
+
     private void CheckMissionProgress()
     {
-        foreach (var enemyData in currentEnemyData)
+        foreach (var enemyData in currentEnemyDataClone)
         {
-            if (enemyData.quanity > 0)
+            if (enemyData.killed < enemyData.quantity)
             {
                 return;
             }
@@ -55,4 +103,18 @@ public class LevelManager : Singleton<LevelManager>
         SceneController.Instance.NextLevel();
     }
 
+}
+
+public class EnemyDataInstance
+{
+    public CharacterColor characterColor;
+    public int killed;
+    public int quantity;
+
+    public EnemyDataInstance(CharacterColor color, int quantity)
+    {
+        this.characterColor = color;
+        this.quantity = quantity;
+        this.killed = 0;
+    }
 }

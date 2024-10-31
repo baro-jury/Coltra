@@ -20,7 +20,7 @@ public class PlayerController : CharacterBase
     public bool isGray = true;
 
     [Header("---------Player---------")]
-    [SerializeField] private Player player;
+    public Player player;
 
     public float bulletForce = 500.0f;
 
@@ -145,6 +145,7 @@ public class PlayerController : CharacterBase
         else if (bulletColor != currentColor)
         {
             DecreaseHealth();
+            GameEvent.OnPlayerIsShot?.Invoke(player.health);
             if (player.health == 0)
             {
                 Die();
