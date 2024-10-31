@@ -98,16 +98,16 @@ public class IngameController : Singleton<IngameController>
     void TurnToggleSound()
     {
         soundToggle = !soundToggle;
-        AudioManager.instance.soundSource.mute = soundToggle;
+        AudioManager.instance.soundSource.mute = !soundToggle;
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
     }
     void TurnToggleMusic()
     {
         musicToggle = !musicToggle;
-        AudioManager.instance.soundSource.mute = musicToggle;
-        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        btnSound.GetComponent<Image>().color = soundToggle ? Color.white : Color.gray;
+        AudioManager.instance.musicSource.mute = !musicToggle;
+        AudioManager.instance.musicSource.PlayOneShot(clickButtonClip);
+        btnMusic.GetComponent<Image>().color = musicToggle ? Color.white : Color.gray;
     }
 
     //void TurnOnSound()
