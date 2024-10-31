@@ -32,8 +32,9 @@ public class GameManager : MonoBehaviour
     {
         if (!PlayerPrefs.HasKey("_IsFirstTimePlay"))
         {
-            PlayerPrefs.SetInt(PROGRESS, 1);
             PlayerPrefs.SetInt("_IsFirstTimePlay", 0);
+            PlayerPrefs.SetInt(PROGRESS, 1);
+            PlayerPrefs.Save();
         }
     }
 
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
     public void SetLevel(int level)
     {
         PlayerPrefs.SetInt(PROGRESS, level);
+        PlayerPrefs.Save();
     }
 
     public int GetLevel()
