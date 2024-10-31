@@ -104,7 +104,7 @@ public class MonsterController : MonoBehaviour
         Flip(rb2D.velocity.x);
     }
 
-    void Flip(float xVel)
+    protected void Flip(float xVel)
     {
         Vector3 scale = transform.localScale;
         if (xVel * scale.x * (int)spriteDirection < 0) scale.x *= -1f;
@@ -187,7 +187,7 @@ public class MonsterController : MonoBehaviour
         return monster.health == 0;
     }
 
-    void MonsterState()
+    internal virtual void MonsterState()
     {
         timer += Time.deltaTime;
         if (timer > liveTime)
@@ -196,7 +196,7 @@ public class MonsterController : MonoBehaviour
         }
     }
 
-    void UpdateAnimation()
+    protected virtual void UpdateAnimation()
     {
         anim.SetFloat("xVelocity", rb2D.velocity.x);
         anim.SetFloat("yVelocity", rb2D.velocity.y);

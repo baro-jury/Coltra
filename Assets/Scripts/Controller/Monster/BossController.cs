@@ -26,11 +26,22 @@ public class BossController : MonsterController
         Vector2 velocity = moveDirection.normalized * monster.velocity;
         rb2D.velocity = velocity;
 
-        RaycastHit2D hitObstacle = Physics2D.Raycast(transform.position, moveDirection.normalized, obstacleDistance, obstacleLayers);
-        if (hitObstacle.collider != null)
+        float distance = Vector2.Distance(transform.position, target.transform.position);
+        if (distance < obstacleDistance)
         {
-            moveDirection = new Vector2(target.transform.position.x - transform.position.x, 0);
-            rb2D.velocity = velocity * -1;
+            rb2D.velocity = Vector2.zero;
         }
+
+        Flip(rb2D.velocity.x);
+    }
+
+    internal override void MonsterState()
+    {
+        
+    }
+
+    protected override void UpdateAnimation()
+    {
+
     }
 }

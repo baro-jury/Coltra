@@ -35,3 +35,7 @@ MonoBehaviour:
     enemyData:
     - characterColor: 5
       quantity: 2
+  - level: 6
+    enemyData:
+    - characterColor: 5
+      quantity: 2
