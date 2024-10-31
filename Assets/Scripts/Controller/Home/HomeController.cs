@@ -20,8 +20,9 @@ public class HomeController : Singleton<HomeController>
     public Button btnSoundOn;
     public Button btnMusicOff;
     public Button btnMusicOn;
-    public Button btnJoinGame;
+    public Button btnCredits;
     public Button[] btnsBackToMenu;
+    public Button[] btnsLevel;
 
     [Header("---------- Panel ----------")]
     public GameObject panelMenu;
@@ -29,6 +30,7 @@ public class HomeController : Singleton<HomeController>
 
     [Header("---------- Tab ----------")]
     public GameObject tabSetting;
+    public GameObject tabCredits;
 
     [Header("---------- Text ----------")]
     public Text levelText;
@@ -47,9 +49,11 @@ public class HomeController : Singleton<HomeController>
         btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);
         btnMusicOff.gameObject.SetActive(AudioManager.instance.musicSource.mute);
         tabSetting.SetActive(false);
+        tabCredits.SetActive(false);
 
+        HandleLevelButtons();
         RemoveButtonListener(btnsBackToMenu);
-        RemoveButtonListener(btnPlay, btnSetting, btnSoundOff, btnSoundOn, btnMusicOff, btnMusicOn, btnJoinGame);
+        RemoveButtonListener(btnPlay, btnSetting, btnSoundOff, btnSoundOn, btnMusicOff, btnMusicOn, btnCredits);
 
         foreach (var backBt in btnsBackToMenu)
         {
@@ -61,7 +65,7 @@ public class HomeController : Singleton<HomeController>
         btnSoundOn.onClick.AddListener(TurnOffSound);
         btnMusicOff.onClick.AddListener(TurnOnMusic);
         btnMusicOn.onClick.AddListener(TurnOffMusic);
-        btnJoinGame.onClick.AddListener(JoinGame);
+        btnCredits.onClick.AddListener(OpenCredits);
     }
 
     public void ShowPanel(GameObject panelObj)
@@ -90,6 +94,31 @@ public class HomeController : Singleton<HomeController>
         }
     }
 
+    private void HandleLevelButtons()
+    {
+        //RemoveButtonListener(btnsLevel);
+
+        //for (int j = 0; j < btnsLevel.Length; j++)
+        //{
+        //    btnsLevel[j].onClick.AddListener(() =>
+        //    {
+        //        JoinLevel(j + 1);
+        //    });
+        //}
+
+        for (int i = 0; i < btnsLevel.Length; i++)
+        {
+            if (i < GameManager.instance.GetLevel())
+            {
+                btnsLevel[i].interactable = true;
+            }
+            else
+            {
+                btnsLevel[i].interactable = false;
+            }
+        }
+    }
+
     void PlayGame()
     {
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
@@ -101,7 +130,6 @@ public class HomeController : Singleton<HomeController>
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         tabSetting.SetActive(true);
     }
-
 
     void TurnOnSound()
     {
@@ -129,6 +157,12 @@ public class HomeController : Singleton<HomeController>
         AudioManager.instance.musicSource.mute = true;
         btnMusicOff.gameObject.SetActive(true);
     }
+    
+    void OpenCredits()
+    {
+        AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
+        tabCredits.SetActive(true);
+    }
 
     void BackToMenu()
     {
@@ -136,9 +170,9 @@ public class HomeController : Singleton<HomeController>
         ShowPanel(panelMenu);
     }
 
-    void JoinGame()
+    public void JoinLevel(int level)
     {
         AudioManager.instance.soundSource.PlayOneShot(gameStartClip);
-        SceneManager.LoadScene("Level 1");
+        SceneManager.LoadScene("Level " + level);
     }
 }

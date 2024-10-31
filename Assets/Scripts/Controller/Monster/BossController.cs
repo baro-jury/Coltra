@@ -20,4 +20,28 @@ public class BossController : MonsterController
             }
         }
     }
+
+    internal override void MonsterMove()
+    {
+        Vector2 velocity = moveDirection.normalized * monster.velocity;
+        rb2D.velocity = velocity;
+
+        float distance = Vector2.Distance(transform.position, target.transform.position);
+        if (distance < obstacleDistance)
+        {
+            rb2D.velocity = Vector2.zero;
+        }
+
+        Flip(rb2D.velocity.x);
+    }
+
+    internal override void MonsterState()
+    {
+        
+    }
+
+    protected override void UpdateAnimation()
+    {
+
+    }
 }

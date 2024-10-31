@@ -17,7 +17,7 @@ TagManager:
   - Player
   - Ground
   - Enemy
-  - 
+  - Boss
   - 
   - 
   - 
@@ -44,11 +44,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 1249535765
+    locked: 0
   - name: Player
     uniqueID: 4212958153
     locked: 0
   - name: Enemy
     uniqueID: 109466813
+    locked: 0
+  - name: Bullet
+    uniqueID: 312701279
     locked: 0
   - name: Ground
     uniqueID: 768156585
