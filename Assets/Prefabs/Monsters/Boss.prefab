@@ -176,7 +176,7 @@ MonoBehaviour:
   spriteDirection: 1
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 0
   obstacleDistance: 10
   bulletPrefab: {fileID: 6510611370532917505, guid: ac988e9c589557044b9ce5e37f82cf1f, type: 3}
   bulletPool: []
@@ -187,6 +187,7 @@ MonoBehaviour:
   meleeDamage: 1
   liveTime: 0
   bulletColor: 0
+  currentHP: 0
 --- !u!1 &8578355755531340853
 GameObject:
   m_ObjectHideFlags: 0
