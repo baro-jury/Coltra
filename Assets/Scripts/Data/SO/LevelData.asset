@@ -16,28 +16,22 @@ MonoBehaviour:
   - level: 1
     enemyData:
     - characterColor: 1
-      killed: 0
       quantity: 2
     - characterColor: 3
-      killed: 0
       quantity: 1
   - level: 2
     enemyData:
     - characterColor: 2
-      killed: 0
       quantity: 2
   - level: 3
     enemyData:
     - characterColor: 3
-      killed: 0
       quantity: 3
   - level: 4
     enemyData:
     - characterColor: 4
-      killed: 0
       quantity: 3
   - level: 5
     enemyData:
     - characterColor: 5
-      killed: 0
       quantity: 2
