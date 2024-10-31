@@ -56,7 +56,6 @@ public class MonsterController : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
-        InitColors();
         //target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
 
         moveDirection = new Vector2(target.transform.position.x - transform.position.x, 0);
@@ -66,17 +65,7 @@ public class MonsterController : MonoBehaviour
 
     }
 
-    void InitColors()
-    {
-        //characterColor = ColorData.GetRandomColor();
-        //Color color = ColorData.GetColor(characterColor);
-        //spriteRenderer.color = color;
-
-        //var list = GameManager.instance.colorData.colorList;
-        //spriteRenderer.color = list[Random.Range(0, list.Count)];
-    }
-
-    void InitForAttack()
+    protected virtual void InitForAttack()
     {
         if (bulletPrefab != null)
         {
@@ -86,7 +75,6 @@ public class MonsterController : MonoBehaviour
             for (int i = 0; i < amountBulletsToPool; i++)
             {
                 temp = Instantiate(bulletPrefab, pool);
-                //temp.GetComponent<EnemyBulletController>()._renderer.color = spriteRenderer.color;
                 temp.GetComponent<EnemyBulletController>()._renderer.color = ColorData.GetColor(bulletColor);
                 temp.SetActive(false);
                 bulletPool.Add(temp);
