@@ -8,6 +8,7 @@ public class CharacterBase : MonoBehaviour
     #region Components
     [Header("---------Components---------")]
     protected Rigidbody2D rb;
+    protected Animator anim;
     protected BoxCollider2D collid;
     protected GameObject currentOneWayPlatform;
     [SerializeField] protected List<GameObject> platformCantFall;
@@ -37,6 +38,7 @@ public class CharacterBase : MonoBehaviour
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         collid = GetComponent<BoxCollider2D>();
     }
 

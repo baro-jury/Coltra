@@ -53,8 +53,8 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
-        
         rb2D = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         InitColors();
         //target = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
@@ -96,16 +96,12 @@ public class MonsterController : MonoBehaviour
 
     void Update()
     {
-        MonsterAttack();
         MonsterState();
+
+        UpdateAnimation();
     }
 
-    void FixedUpdate()
-    {
-        MonsterMove();
-    }
-
-    void MonsterMove()
+    internal void MonsterMove()
     {
         Vector2 velocity = moveDirection.normalized * monster.velocity;
         rb2D.velocity = velocity;
@@ -127,20 +123,19 @@ public class MonsterController : MonoBehaviour
         transform.localScale = scale;
     }
 
-    void MonsterAttack()
+    internal void MonsterAttack()
     {
         if (Time.time < lastTimeAttack + 1 / attacksPerSec)
         {
             return;
         }
 
-        //anim.SetTrigger("IsAttacking");
-        RangedAttack();
+        anim.SetTrigger("IsAttacking");
 
         lastTimeAttack = Time.time;
     }
 
-    void RangedAttack()
+    public void RangedAttack()
     {
         Vector2 shootDir = target.transform.position - attackPoint.position;
         if (shootDir.x * moveDirection.x <= 0) return;
@@ -211,5 +206,12 @@ public class MonsterController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void UpdateAnimation()
+    {
+        anim.SetFloat("xVelocity", rb2D.velocity.x);
+        anim.SetFloat("yVelocity", rb2D.velocity.y);
+        anim.SetBool("IsDead", IsDead());
     }
 }

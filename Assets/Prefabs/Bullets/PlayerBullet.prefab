@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 8167373808700249853}
   - component: {fileID: 6849601841284042156}
   - component: {fileID: 7654497299692055904}
-  - component: {fileID: 4682569300434869201}
   - component: {fileID: 5199728727458353651}
+  - component: {fileID: 4682569300434869201}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: PlayerBullet
   m_TagString: PlayerBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6510611370532917505}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.4, y: 0.06, z: 0}
-  m_LocalScale: {x: 0.7442, y: 0.132, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4b3b648cad3a93041b196c514e86e2df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,24 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
---- !u!114 &4682569300434869201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6510611370532917505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94afacb106f49514f808977b5d0928e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteDirection: 0
-  bulletSpeed: 500
-  bulletForce: 1
-  _lifeTime: 5
-  bulletColor: 0
-  isBulletPlayer: 0
 --- !u!61 &5199728727458353651
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -143,12 +125,28 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 0.56, y: 0.4}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.56, y: 0.4}
   m_EdgeRadius: 0
+--- !u!114 &4682569300434869201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6510611370532917505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94afacb106f49514f808977b5d0928e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteDirection: 0
+  _lifeTime: 5
+  bulletColor: 0
+  isBulletPlayer: 0
