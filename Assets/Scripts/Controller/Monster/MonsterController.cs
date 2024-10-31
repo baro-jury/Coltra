@@ -98,6 +98,8 @@ public class MonsterController : MonoBehaviour
     {
         MonsterAttack();
         MonsterState();
+
+        UpdateAnimation();
     }
 
     void FixedUpdate()
@@ -211,5 +213,12 @@ public class MonsterController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    void UpdateAnimation()
+    {
+        anim.SetFloat("xVelocity", rb2D.velocity.x);
+        anim.SetFloat("yVelocity", rb2D.velocity.y);
+        anim.SetBool("IsDead", IsDead());
     }
 }

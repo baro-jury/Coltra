@@ -171,7 +171,6 @@ public class PlayerController : CharacterBase
     {
         GameEvent.OnPlayerDead?.Invoke();
         isDead = true;
-        anim.SetBool("IsDead", isDead);
         Debug.Log("You are dead!!!");
         Time.timeScale = 0;
     }
@@ -194,6 +193,6 @@ public class PlayerController : CharacterBase
     {
         anim.SetFloat("xVelocity", rb.velocity.x);
         anim.SetFloat("yVelocity", rb.velocity.y);
-        //anim.SetBool("IsDead", isDead);
+        anim.SetBool("IsDead", isDead);
     }
 }
