@@ -12,7 +12,6 @@ public class MonsterSpawner : MonoBehaviour
     private bool isSpawned;
     private GameObject monster;
 
-    // Start is called before the first frame update
     void Start()
     {
         timer = 0;
@@ -25,7 +24,6 @@ public class MonsterSpawner : MonoBehaviour
         monster.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         SpawnMonster();
