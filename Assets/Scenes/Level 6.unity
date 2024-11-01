@@ -6381,6 +6381,7 @@ MonoBehaviour:
   objectivePrefab: {fileID: 152883788773008273, guid: 0ce4c435247a2974ab5b44bec93a0202, type: 3}
   monsterObj: {fileID: 2009437543}
   bulletObj: {fileID: 187013599}
+  bossImgObj: {fileID: 359510108}
 --- !u!1 &1874059893
 GameObject:
   m_ObjectHideFlags: 0

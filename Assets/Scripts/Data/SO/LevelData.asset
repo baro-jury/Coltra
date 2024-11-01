@@ -15,16 +15,18 @@ MonoBehaviour:
   LevelMission:
   - level: 1
     enemyData:
-    - characterColor: 1
-      quantity: 1
-  - level: 2
-    enemyData:
-    - characterColor: 2
-      quantity: 2
-  - level: 3
-    enemyData:
     - characterColor: 3
       quantity: 3
+  - level: 2
+    enemyData:
+    - characterColor: 5
+      quantity: 3
+  - level: 3
+    enemyData:
+    - characterColor: 4
+      quantity: 3
+    - characterColor: 5
+      quantity: 1
   - level: 4
     enemyData:
     - characterColor: 1
