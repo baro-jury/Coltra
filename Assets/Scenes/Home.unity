@@ -1791,7 +1791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &426322263
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5779,6 +5779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   colorData: {fileID: 11400000, guid: 8d44df4bce335bc4d92eb7e0bd1a9fc0, type: 2}
+  introDisplayed: 0
 --- !u!4 &1580668776
 Transform:
   m_ObjectHideFlags: 0

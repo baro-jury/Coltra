@@ -15,7 +15,7 @@ public class IngameController : Singleton<IngameController>
     [Header("---------- Button ----------")]
     public Button btnPause;
     public Button btnResume;
-    public Button btnReplay;
+    public Button[] btnsReplay;
     public Button btnSound;
     public Button btnMusic;
     public Button btnHome;
@@ -29,8 +29,8 @@ public class IngameController : Singleton<IngameController>
     [Header("---------- Text ----------")]
     public Text levelText;
 
-    private bool soundToggle;
-    private bool musicToggle;
+    private bool soundState;
+    private bool musicState;
 
     [SerializeField] Sprite checkBg;
     [SerializeField] Sprite unCheckBg;
@@ -47,33 +47,35 @@ public class IngameController : Singleton<IngameController>
         AudioManager.instance.musicSource.clip = musicIngame;
         AudioManager.instance.musicSource.Play();
 
-        //btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);
-        //btnMusicOff.gameObject.SetActive(AudioManager.instance.musicSource.mute);
-
         panelPause.SetActive(false);
         panelBoss.SetActive(false);
         barBossHP.wholeNumbers = true;
 
-        RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome);
+        RemoveButtonListener(btnsReplay);
+        RemoveButtonListener(btnPause, btnResume, btnSound, btnMusic, btnHome);
 
-        soundToggle = !AudioManager.instance.soundSource.mute;
-        musicToggle = !AudioManager.instance.musicSource.mute;
+        soundState = GameManager.instance.GetSoundState();
+        musicState = GameManager.instance.GetMusicState();
 
-        btnSound.GetComponent<Image>().sprite = soundToggle ? checkBg : unCheckBg;
-        btnMusic.GetComponent<Image>().sprite = musicToggle ? checkBg : unCheckBg;
+        btnSound.GetComponent<Image>().sprite = soundState ? checkBg : unCheckBg;
+        btnMusic.GetComponent<Image>().sprite = musicState ? checkBg : unCheckBg;
 
+        foreach(var btn in btnsReplay)
+        {
+            btn.onClick.AddListener(Replay);
+        }
         btnPause.onClick.AddListener(Pause);
         btnResume.onClick.AddListener(Resume);
-        btnReplay.onClick.AddListener(Replay);
-        btnSound.onClick.AddListener(TurnToggleSound);
-        btnMusic.onClick.AddListener(TurnToggleMusic);
+        btnSound.onClick.AddListener(ToggleSound);
+        btnMusic.onClick.AddListener(ToggleMusic);
         btnHome.onClick.AddListener(GoHome);
         btnHomeOver.onClick.AddListener(GoHome);
     }
 
     private void OnDestroy()
     {
-        RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome, btnHomeOver);
+        RemoveButtonListener(btnsReplay);
+        RemoveButtonListener(btnPause, btnResume, btnSound, btnMusic, btnHome, btnHomeOver);
 
         GameEvent.OnDisplayStartGate -= PlayGateSound;
         GameEvent.OnCompleteLevel -= PlayWinSound;
@@ -115,22 +117,22 @@ public class IngameController : Singleton<IngameController>
         Time.timeScale = 1;
     }
 
-    void TurnToggleSound()
+    void ToggleSound()
     {
-        soundToggle = !soundToggle;
-        AudioManager.instance.soundSource.mute = !soundToggle;
-        GameManager.instance.SetSoundState(!soundToggle);
+        soundState = !soundState;
+        AudioManager.instance.soundSource.mute = !soundState;
+        GameManager.instance.SetSoundState(soundState);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        btnSound.GetComponent<Image>().sprite = soundToggle ? checkBg : unCheckBg;
+        btnSound.GetComponent<Image>().sprite = soundState ? checkBg : unCheckBg;
     }
     
-    void TurnToggleMusic()
+    void ToggleMusic()
     {
-        musicToggle = !musicToggle;
-        AudioManager.instance.soundSource.mute = !musicToggle;
-        GameManager.instance.SetMusicState(!musicToggle);
+        musicState = !musicState;
+        AudioManager.instance.musicSource.mute = !musicState;
+        GameManager.instance.SetMusicState(musicState);
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
-        btnMusic.GetComponent<Image>().sprite = musicToggle ? checkBg : unCheckBg;
+        btnMusic.GetComponent<Image>().sprite = musicState ? checkBg : unCheckBg;
     }
 
     public void SetBossHP(float curHP, float maxHP)

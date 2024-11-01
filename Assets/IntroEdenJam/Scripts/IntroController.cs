@@ -47,6 +47,12 @@ public class IntroController : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.instance.introDisplayed)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
         back.color = startColorBack;
         defaultFullTitleScale = fullTitle.transform.localScale;
         StartCoroutine(StartIntro());
@@ -273,7 +279,8 @@ public class IntroController : MonoBehaviour
         }
         else
         {
-            this.gameObject.SetActive(false);
+            GameManager.instance.introDisplayed = true;
+            gameObject.SetActive(false);
         }
     }
 }
