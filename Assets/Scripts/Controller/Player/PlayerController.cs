@@ -139,6 +139,19 @@ public class PlayerController : CharacterBase
             TakeDamage(collision.GetComponent<EnemyBulletController>().bulletColor);
             collision.gameObject.SetActive(false);
         }
+
+        if (collision.gameObject.CompareTag(GameConstants.gateEnd))
+        {
+            rb.velocity = Vector2.zero;
+            anim.SetTrigger("Player_disapear");
+            StartCoroutine(DelaySecond());
+        }
+    }
+
+    IEnumerator DelaySecond()
+    {
+        yield return new WaitForSeconds(1.0f);
+        SceneController.Instance.NextLevel();
     }
 
     void TakeDamage(CharacterColor bulletColor)
