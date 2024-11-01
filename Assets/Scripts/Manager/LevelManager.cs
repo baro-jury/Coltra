@@ -19,6 +19,7 @@ public class LevelManager : Singleton<LevelManager>
     private int currentLevel;
 
     [SerializeField] private GameObject monsterObj;
+    [SerializeField] private GameObject bulletObj;
 
     private void Awake()
     {
@@ -105,6 +106,7 @@ public class LevelManager : Singleton<LevelManager>
         GameEvent.OnCompleteObjective?.Invoke();
         //SceneController.Instance.NextLevel();
         Destroy(monsterObj);
+        Destroy(bulletObj);
     }
 
 }

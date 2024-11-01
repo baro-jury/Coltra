@@ -2011,7 +2011,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 575526752}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.44, y: 0.57, z: -0.026928749}
+  m_LocalPosition: {x: -5.3, y: 0.57, z: -0.026928749}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3467,7 +3467,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216908021}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.32887745, y: 0, z: 0}
+  m_LocalPosition: {x: -5.188877, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4042,7 +4042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8231325192737344137, guid: b4bce4d13310434418bc3e084123cda2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.3
+      value: -5.16
       objectReference: {fileID: 0}
     - target: {fileID: 8231325192737344137, guid: b4bce4d13310434418bc3e084123cda2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5560,6 +5560,7 @@ MonoBehaviour:
   objectiveUI: {fileID: 139643214}
   objectivePrefab: {fileID: 152883788773008273, guid: 0ce4c435247a2974ab5b44bec93a0202, type: 3}
   monsterObj: {fileID: 2009437543}
+  bulletObj: {fileID: 187013599}
 --- !u!1 &1958245778
 GameObject:
   m_ObjectHideFlags: 0
