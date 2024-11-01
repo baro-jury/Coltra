@@ -35,6 +35,7 @@ public class LevelManager : Singleton<LevelManager>
     {
         currentLevel = SceneController.Instance.GetCurrentSceneIndex();
         if (currentLevel > GameManager.instance.GetLevel()) GameManager.instance.SetLevel(currentLevel);
+        IngameController.Instance.SetLevelText(currentLevel);
         currentEnemyData = levelData.GetEnemyDataByLevel(currentLevel);
 
         currentEnemyDataClone = new List<EnemyDataInstance>();
