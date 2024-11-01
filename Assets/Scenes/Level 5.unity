@@ -818,7 +818,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -1207,7 +1207,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -1285,7 +1285,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -1736,7 +1736,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -2101,7 +2101,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -2719,7 +2719,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -3834,7 +3834,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 4
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -4244,7 +4244,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -4569,7 +4569,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 4
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -6008,7 +6008,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -6086,7 +6086,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 4
+      value: 14
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
@@ -6698,6 +6698,7 @@ MonoBehaviour:
   objectivePrefab: {fileID: 152883788773008273, guid: 0ce4c435247a2974ab5b44bec93a0202, type: 3}
   monsterObj: {fileID: 2009437543}
   bulletObj: {fileID: 187013599}
+  bossImgObj: {fileID: 0}
 --- !u!1 &1874059893
 GameObject:
   m_ObjectHideFlags: 0
@@ -7860,7 +7861,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 3749787332745600867, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: delaySpawnTime
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
