@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class SceneController : Singleton<SceneController>
 {
+    [SerializeField] Animator gateAnim;
+    [SerializeField] Animator playerAnim;
+    private void Awake()
+    {
+        HandleLoadAnimBeginLevel();
+    }
     public void NextLevel()
     {
         int currentIndex = SceneManager.GetActiveScene().buildIndex;
@@ -27,5 +33,22 @@ public class SceneController : Singleton<SceneController>
     public int GetCurrentSceneIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
+    }
+
+    public void HandleLoadAnimBeginLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            StartCoroutine(LoadAnimationLevel());
+    }
+
+    IEnumerator LoadAnimationLevel()
+    {
+        //gateAnim.SetTrigger("Gate_appear");
+        GameEvent.OnDisplayStartGate?.Invoke();
+        yield return new WaitForSeconds(1.5f);
+        playerAnim.gameObject.SetActive(true);
+        playerAnim.SetTrigger("Player_appear");
+        yield return new WaitForSeconds(1.25f);
+        gateAnim.SetTrigger("Gate_disapear");
     }
 }

@@ -7,6 +7,8 @@ public class PlayerController : CharacterBase
 {
     private float inputX;
 
+    SpriteRenderer sr;
+
     [Header("---------Shoot---------")]
     public Transform shootPoint;
     public GameObject bulletPrefab;
@@ -27,6 +29,7 @@ public class PlayerController : CharacterBase
     protected override void Start()
     {
         base.Start();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -195,5 +198,12 @@ public class PlayerController : CharacterBase
         anim.SetFloat("xVelocity", rb.velocity.x);
         anim.SetFloat("yVelocity", rb.velocity.y);
         anim.SetBool("IsDead", isDead);
+    }
+
+    public void LockAlpha()
+    {
+        Color color = sr.color;
+        color.a = 1f;
+        sr.color = color;
     }
 }
