@@ -35,12 +35,13 @@ public class IngameController : Singleton<IngameController>
     [SerializeField] Sprite checkBg;
     [SerializeField] Sprite unCheckBg;
 
-    private void Awake()
+    protected override void Awake()
     {
-
+        base.Awake();
         GameEvent.OnDisplayStartGate += PlayGateSound;
         GameEvent.OnCompleteLevel += PlayWinSound;
     }
+
     void Start()
     {
         AudioManager.instance.musicSource.clip = musicIngame;

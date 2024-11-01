@@ -179,6 +179,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WinglessCrowSpawner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3749787332745600866, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -671,6 +675,10 @@ PrefabInstance:
     - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_Name
       value: WinglessCrowSpawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3749787332745600866, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_RootOrder
@@ -2119,6 +2127,10 @@ PrefabInstance:
     - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_Name
       value: WinglessCrowSpawner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3749787332745600866, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_RootOrder
@@ -4144,7 +4156,7 @@ PrefabInstance:
       objectReference: {fileID: 1545348176}
     - target: {fileID: 8124320172943271432, guid: e4c2b4dfde8aa144ca7345db473a927d, type: 3}
       propertyPath: delaySpawnTime
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8124320172943271433, guid: e4c2b4dfde8aa144ca7345db473a927d, type: 3}
       propertyPath: m_RootOrder
@@ -7078,6 +7090,10 @@ PrefabInstance:
     - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_Name
       value: WinglessCrowSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 3749787332745600865, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3749787332745600866, guid: ee4e3eef79e59f14d90116f59343d9c6, type: 3}
       propertyPath: m_RootOrder
