@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 109466813
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: cffa329da8bbf554b98f3d4b1bd7ae14, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -185,7 +185,7 @@ MonoBehaviour:
   attacksPerSec: 0.33333334
   bulletForce: 300
   meleeDamage: 1
-  liveTime: 60
+  liveTime: 30
   bulletColor: 0
 --- !u!1 &8578355755531340853
 GameObject:

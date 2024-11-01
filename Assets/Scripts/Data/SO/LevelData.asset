@@ -27,11 +27,17 @@ MonoBehaviour:
       quantity: 3
   - level: 4
     enemyData:
+    - characterColor: 1
+      quantity: 2
     - characterColor: 4
       quantity: 3
   - level: 5
     enemyData:
     - characterColor: 5
+      quantity: 2
+    - characterColor: 3
+      quantity: 2
+    - characterColor: 7
       quantity: 2
   - level: 6
     enemyData:
