@@ -112,7 +112,7 @@ public class BossController : MonsterController
                 IngameController.Instance.panelBoss.SetActive(false);
                 IngameController.Instance.PlayBossDefeatedSound();
                 gameObject.SetActive(false);
-                GameEvent.OnEnemyKill?.Invoke(BossColor);
+                GameEvent.OnEnemyKill?.Invoke(BossColor, true);
             }
 
             collision.gameObject.SetActive(false);

@@ -21,7 +21,7 @@ public class LevelManager : Singleton<LevelManager>
     [SerializeField] private GameObject monsterObj;
     [SerializeField] private GameObject bulletObj;
 
-    private void Awake()
+    protected override void Awake()
     {
         GameEvent.OnEnemyKill += EnemyKilled;
     }
@@ -47,8 +47,13 @@ public class LevelManager : Singleton<LevelManager>
         UpdateObjectiveUI();
     }
 
-    public void EnemyKilled(CharacterColor color)
+    public void EnemyKilled(CharacterColor color, bool isBoss)
     {
+        if (isBoss)
+        {
+            GameEvent.OnBossKilled?.Invoke();
+            return;
+        }
         EnemyDataInstance enemyData = currentEnemyDataClone.Find(data => data.characterColor == color);
         if (enemyData != null)
         {
