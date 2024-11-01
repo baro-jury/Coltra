@@ -9,6 +9,7 @@ public class IngameController : Singleton<IngameController>
     [Header("---------- Audio ----------")]
     public AudioClip musicIngame;
     public AudioClip clickButtonClip;
+    public AudioClip displayGateClip;
 
     [Header("---------- Button ----------")]
     public Button btnPause;
@@ -33,6 +34,11 @@ public class IngameController : Singleton<IngameController>
     [SerializeField] Sprite checkBg;
     [SerializeField] Sprite unCheckBg;
 
+    private void Awake()
+    {
+
+        GameEvent.OnDisplayStartGate += PlayGateSound;
+    }
     void Start()
     {
         //AudioManager.instance.musicSource.clip = musicIngame;
@@ -53,6 +59,7 @@ public class IngameController : Singleton<IngameController>
         btnSound.GetComponent<Image>().sprite = soundToggle ? checkBg : unCheckBg;
         btnMusic.GetComponent<Image>().sprite = musicToggle ? checkBg : unCheckBg;
 
+
         btnPause.onClick.AddListener(Pause);
         btnResume.onClick.AddListener(Resume);
         btnReplay.onClick.AddListener(Replay);
@@ -71,6 +78,8 @@ public class IngameController : Singleton<IngameController>
         btnMusic.onClick.RemoveAllListeners();
         btnHome.onClick.RemoveAllListeners();
         btnHomeOver.onClick.RemoveAllListeners();
+
+        GameEvent.OnDisplayStartGate -= PlayGateSound;
     }
 
     private void RemoveButtonListener(params Button[] buttons)
@@ -134,4 +143,8 @@ public class IngameController : Singleton<IngameController>
         barBossHP.value = curHP;
     }
 
+    public void PlayGateSound()
+    {
+        AudioManager.instance.soundSource.PlayOneShot(displayGateClip);
+    }
 }

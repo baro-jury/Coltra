@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GameManager : MonoBehaviour
         MakeSingleInstance();
         IsFirstTimePlay();
     }
+
+    
 
     private const string FIRST_TIME_PLAY = "IsFirstTimePlay";
     private const string PROGRESS = "Progress";

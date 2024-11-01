@@ -14,5 +14,7 @@ public static class GameEvent
     public static Action<CharacterColor> OnEnemyKill;
 
     public static Action OnCompleteLevel;
+    public static Action OnLevelStart;
+    public static Action OnDisplayStartGate;
 
 }
