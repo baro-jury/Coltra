@@ -11,6 +11,7 @@ public class IngameController : Singleton<IngameController>
     public AudioClip clickButtonClip;
     public AudioClip displayGateClip;
     public AudioClip displayDoneObjectiveClip;
+    public AudioClip defeatBossClip;
 
     [Header("---------- Button ----------")]
     public Button btnPause;
@@ -54,16 +55,16 @@ public class IngameController : Singleton<IngameController>
         panelBoss.SetActive(false);
         barBossHP.wholeNumbers = true;
 
-        RemoveButtonListener(btnsReplay);
-        RemoveButtonListener(btnPause, btnResume, btnSound, btnMusic, btnHome);
-
         soundState = GameManager.instance.GetSoundState();
         musicState = GameManager.instance.GetMusicState();
 
         btnSound.GetComponent<Image>().sprite = soundState ? checkBg : unCheckBg;
         btnMusic.GetComponent<Image>().sprite = musicState ? checkBg : unCheckBg;
 
-        foreach(var btn in btnsReplay)
+        RemoveButtonListener(btnsReplay);
+        RemoveButtonListener(btnPause, btnResume, btnSound, btnMusic, btnHome);
+
+        foreach (var btn in btnsReplay)
         {
             btn.onClick.AddListener(Replay);
         }
@@ -92,6 +93,11 @@ public class IngameController : Singleton<IngameController>
         {
             button.onClick.RemoveAllListeners();
         }
+    }
+
+    public void SetLevelText(int level)
+    {
+        levelText.text = "LEVEL " + level;
     }
 
     public void Pause()
@@ -162,6 +168,11 @@ public class IngameController : Singleton<IngameController>
     public void PlayGateSound()
     {
         AudioManager.instance.soundSource.PlayOneShot(displayGateClip);
+    }
+
+    public void PlayBossDefeatedSound()
+    {
+        AudioManager.instance.soundSource.PlayOneShot(defeatBossClip);
     }
 
     public void PlayWinSound()

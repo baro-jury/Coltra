@@ -110,6 +110,7 @@ public class BossController : MonsterController
             if (IsDead())
             {
                 IngameController.Instance.panelBoss.SetActive(false);
+                IngameController.Instance.PlayBossDefeatedSound();
                 gameObject.SetActive(false);
                 GameEvent.OnEnemyKill?.Invoke(BossColor, true);
             }
