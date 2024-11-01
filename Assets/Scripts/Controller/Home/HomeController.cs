@@ -47,8 +47,8 @@ public class HomeController : Singleton<HomeController>
 
         ShowPanel(panelMenu);
 
-        AudioManager.instance.soundSource.mute = GameManager.instance.GetSoundState();
-        AudioManager.instance.musicSource.mute = GameManager.instance.GetMusicState();
+        AudioManager.instance.soundSource.mute = !GameManager.instance.GetSoundState();
+        AudioManager.instance.musicSource.mute = !GameManager.instance.GetMusicState();
         AudioManager.instance.musicSource.clip = musicHome;
         AudioManager.instance.musicSource.Play();
         btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);

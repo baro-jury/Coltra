@@ -27,8 +27,6 @@ public class GameManager : MonoBehaviour
         IsFirstTimePlay();
     }
 
-    
-
     private const string FIRST_TIME_PLAY = "IsFirstTimePlay";
     private const string PROGRESS = "Progress";
     private const string SOUND = "Sound";
@@ -85,6 +83,8 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey(PROGRESS);
         PlayerPrefs.DeleteKey(FIRST_TIME_PLAY);
+        PlayerPrefs.DeleteKey(SOUND);
+        PlayerPrefs.DeleteKey(MUSIC);
         PlayerPrefs.Save();
 
         Application.Quit();
