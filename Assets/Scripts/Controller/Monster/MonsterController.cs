@@ -138,7 +138,7 @@ public class MonsterController : MonoBehaviour
         ShootBullet(shootDir);
     }
 
-    void ShootBullet(Vector2 direction)
+    public virtual void ShootBullet(Vector2 direction)
     {
         GameObject bullet = GetPooledBullet();
         var bulletCtrl = bullet.GetComponent<EnemyBulletController>();
@@ -148,15 +148,15 @@ public class MonsterController : MonoBehaviour
             float rotateValue = Mathf.Atan2(-direction.y, -direction.x) * Mathf.Rad2Deg;
             bullet.transform.rotation = Quaternion.Euler(0, 0, rotateValue + (int)bulletCtrl.spriteDirection);
 
-            if (spriteRenderer.color != null)
-                bulletCtrl.SetBulletColor(bulletColor);
+            //if (spriteRenderer.color != null)
+            //    bulletCtrl.SetBulletColor(bulletColor);
 
             bullet.SetActive(true);
             bulletCtrl._rigid.AddForce(direction.normalized * bulletForce);
         }
     }
 
-    private GameObject GetPooledBullet()
+    public virtual GameObject GetPooledBullet()
     {
         for (int i = 0; i < bulletPool.Count; i++)
         {
