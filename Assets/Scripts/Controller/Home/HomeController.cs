@@ -37,9 +37,6 @@ public class HomeController : Singleton<HomeController>
     public GameObject tabTutorial;
     public GameObject tabResetData;
 
-    [Header("---------- Text ----------")]
-    public Text levelText;
-
     void Start()
     {
         panelObjList.Add(panelMenu);
