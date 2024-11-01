@@ -20,13 +20,17 @@ public class BossController : MonsterController
         {
             Transform pool = GameObject.Find("ObjectPool").transform;
             bulletPool = new List<GameObject>();
-            GameObject temp;
+            GameObject bullet;
+            EnemyBulletController bulletCtrl;
             for (int i = 0; i < amountBulletsToPool; i++)
             {
-                temp = Instantiate(bulletPrefab, pool);
-                temp.GetComponent<EnemyBulletController>()._renderer.color = ColorData.GetColor(ColorData.GetRandomColor());
-                temp.SetActive(false);
-                bulletPool.Add(temp);
+                bullet = Instantiate(bulletPrefab, pool);
+                bulletCtrl = bullet.GetComponent<EnemyBulletController>();
+                var temp = ColorData.GetRandomColor();
+                bulletCtrl._renderer.color = ColorData.GetColor(temp);
+                bulletCtrl.bulletColor = temp;
+                bullet.SetActive(false);
+                bulletPool.Add(bullet);
             }
         }
     }
