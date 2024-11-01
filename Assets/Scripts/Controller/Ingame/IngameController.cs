@@ -53,6 +53,7 @@ public class IngameController : Singleton<IngameController>
 
         panelPause.SetActive(false);
         panelBoss.SetActive(false);
+        panelWinBoss.SetActive(false);
         barBossHP.wholeNumbers = true;
 
         soundState = GameManager.instance.GetSoundState();
