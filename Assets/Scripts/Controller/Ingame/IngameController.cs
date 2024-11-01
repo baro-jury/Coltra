@@ -43,15 +43,15 @@ public class IngameController : Singleton<IngameController>
     }
     void Start()
     {
-        //AudioManager.instance.musicSource.clip = musicIngame;
-        //AudioManager.instance.musicSource.Play();
+        AudioManager.instance.musicSource.clip = musicIngame;
+        AudioManager.instance.musicSource.Play();
 
         //btnSoundOff.gameObject.SetActive(AudioManager.instance.soundSource.mute);
         //btnMusicOff.gameObject.SetActive(AudioManager.instance.musicSource.mute);
 
         panelPause.SetActive(false);
-        //panelBoss.SetActive(false);
-        //barBossHP.wholeNumbers = true;
+        panelBoss.SetActive(false);
+        barBossHP.wholeNumbers = true;
 
         RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome);
 
@@ -60,7 +60,6 @@ public class IngameController : Singleton<IngameController>
 
         btnSound.GetComponent<Image>().sprite = soundToggle ? checkBg : unCheckBg;
         btnMusic.GetComponent<Image>().sprite = musicToggle ? checkBg : unCheckBg;
-
 
         btnPause.onClick.AddListener(Pause);
         btnResume.onClick.AddListener(Resume);
@@ -73,13 +72,7 @@ public class IngameController : Singleton<IngameController>
 
     private void OnDestroy()
     {
-        btnPause.onClick.RemoveAllListeners();
-        btnResume.onClick.RemoveAllListeners();
-        btnReplay.onClick.RemoveAllListeners();
-        btnSound.onClick.RemoveAllListeners();
-        btnMusic.onClick.RemoveAllListeners();
-        btnHome.onClick.RemoveAllListeners();
-        btnHomeOver.onClick.RemoveAllListeners();
+        RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome, btnHomeOver);
 
         GameEvent.OnDisplayStartGate -= PlayGateSound;
         GameEvent.OnCompleteLevel -= PlayWinSound;
