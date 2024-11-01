@@ -72,10 +72,6 @@ public class LevelManager : Singleton<LevelManager>
             bossImgObj.SetActive(true);
             return;
         }
-        else
-        {
-            bossImgObj.SetActive(false);
-        }
         foreach (KeyValuePair<CharacterColor, string> item in progressData)
         {
             if (!objectiveInstances.ContainsKey(item.Key))
