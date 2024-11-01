@@ -18,6 +18,8 @@ public class LevelManager : Singleton<LevelManager>
 
     private int currentLevel;
 
+    [SerializeField] private GameObject monsterObj;
+
     private void Awake()
     {
         GameEvent.OnEnemyKill += EnemyKilled;
@@ -99,8 +101,10 @@ public class LevelManager : Singleton<LevelManager>
 
     private void CompleteLevel()
     {
-        Debug.Log("Level Completed!");
-        SceneController.Instance.NextLevel();
+        Debug.Log("Objective Completed!");
+        GameEvent.OnCompleteObjective?.Invoke();
+        //SceneController.Instance.NextLevel();
+        Destroy(monsterObj);
     }
 
 }

@@ -6,10 +6,16 @@ using UnityEngine.SceneManagement;
 public class SceneController : Singleton<SceneController>
 {
     [SerializeField] Animator gateAnim;
+    [SerializeField] Animator gateEndAnim;
     [SerializeField] Animator playerAnim;
-    private void Awake()
+    private void Start()
     {
-        HandleLoadAnimBeginLevel();
+        HandleLoadAnimStartLevel();
+        GameEvent.OnCompleteObjective += HandleLoadAnimEndLevel;
+    }
+    private void OnDestroy()
+    {
+        GameEvent.OnCompleteObjective -= HandleLoadAnimEndLevel;
     }
     public void NextLevel()
     {
@@ -35,13 +41,13 @@ public class SceneController : Singleton<SceneController>
         return SceneManager.GetActiveScene().buildIndex;
     }
 
-    public void HandleLoadAnimBeginLevel()
+    public void HandleLoadAnimStartLevel()
     {
         if (SceneManager.GetActiveScene().buildIndex != 0)
-            StartCoroutine(LoadAnimationLevel());
+            StartCoroutine(LoadAnimationStartLevel());
     }
 
-    IEnumerator LoadAnimationLevel()
+    IEnumerator LoadAnimationStartLevel()
     {
         //gateAnim.SetTrigger("Gate_appear");
         GameEvent.OnDisplayStartGate?.Invoke();
@@ -50,5 +56,20 @@ public class SceneController : Singleton<SceneController>
         playerAnim.SetTrigger("Player_appear");
         yield return new WaitForSeconds(1.25f);
         gateAnim.SetTrigger("Gate_disapear");
+    }
+
+    public void HandleLoadAnimEndLevel()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+            StartCoroutine(LoadAnimationEndLevel());
+    }
+
+    IEnumerator LoadAnimationEndLevel()
+    {
+        GameEvent.OnCompleteLevel?.Invoke();
+        yield return new WaitForSeconds(1.5f);
+        gateEndAnim.gameObject.SetActive(true);
+        gateEndAnim.SetTrigger("Gate_appear");
+        GameEvent.OnDisplayStartGate?.Invoke();
     }
 }

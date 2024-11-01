@@ -10,6 +10,7 @@ public class IngameController : Singleton<IngameController>
     public AudioClip musicIngame;
     public AudioClip clickButtonClip;
     public AudioClip displayGateClip;
+    public AudioClip displayDoneObjectiveClip;
 
     [Header("---------- Button ----------")]
     public Button btnPause;
@@ -38,6 +39,7 @@ public class IngameController : Singleton<IngameController>
     {
 
         GameEvent.OnDisplayStartGate += PlayGateSound;
+        GameEvent.OnCompleteLevel += PlayWinSound;
     }
     void Start()
     {
@@ -48,8 +50,8 @@ public class IngameController : Singleton<IngameController>
         //btnMusicOff.gameObject.SetActive(AudioManager.instance.musicSource.mute);
 
         panelPause.SetActive(false);
-        panelBoss.SetActive(false);
-        barBossHP.wholeNumbers = true;
+        //panelBoss.SetActive(false);
+        //barBossHP.wholeNumbers = true;
 
         RemoveButtonListener(btnPause, btnResume, btnReplay, btnSound, btnMusic, btnHome);
 
@@ -80,6 +82,7 @@ public class IngameController : Singleton<IngameController>
         btnHomeOver.onClick.RemoveAllListeners();
 
         GameEvent.OnDisplayStartGate -= PlayGateSound;
+        GameEvent.OnCompleteLevel -= PlayWinSound;
     }
 
     private void RemoveButtonListener(params Button[] buttons)
@@ -146,5 +149,10 @@ public class IngameController : Singleton<IngameController>
     public void PlayGateSound()
     {
         AudioManager.instance.soundSource.PlayOneShot(displayGateClip);
+    }
+
+    public void PlayWinSound()
+    {
+        AudioManager.instance.soundSource.PlayOneShot(displayDoneObjectiveClip);
     }
 }
