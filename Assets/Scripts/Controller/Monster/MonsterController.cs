@@ -182,7 +182,7 @@ public class MonsterController : MonoBehaviour
             if (IsDead())
             {
                 gameObject.SetActive(false);
-                GameEvent.OnEnemyKill?.Invoke(bulletColor);
+                GameEvent.OnEnemyKill?.Invoke(bulletColor, false);
             }
 
             collision.gameObject.SetActive(false);

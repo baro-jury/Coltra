@@ -111,7 +111,7 @@ public class BossController : MonsterController
             {
                 IngameController.Instance.panelBoss.SetActive(false);
                 gameObject.SetActive(false);
-                GameEvent.OnEnemyKill?.Invoke(BossColor);
+                GameEvent.OnEnemyKill?.Invoke(BossColor, true);
             }
 
             collision.gameObject.SetActive(false);

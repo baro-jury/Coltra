@@ -20,11 +20,13 @@ public class IngameController : Singleton<IngameController>
     public Button btnMusic;
     public Button btnHome;
     public Button btnHomeOver;
+    public Button btnHomeWin;
 
     [Header("---------- Panel ----------")]
     public GameObject panelPause;
     public GameObject panelBoss;
     public Slider barBossHP;
+    public GameObject panelWinBoss;
 
     [Header("---------- Text ----------")]
     public Text levelText;
@@ -40,6 +42,7 @@ public class IngameController : Singleton<IngameController>
         base.Awake();
         GameEvent.OnDisplayStartGate += PlayGateSound;
         GameEvent.OnCompleteLevel += PlayWinSound;
+        GameEvent.OnBossKilled += DisplayWinGame;
     }
 
     void Start()
@@ -70,15 +73,17 @@ public class IngameController : Singleton<IngameController>
         btnMusic.onClick.AddListener(ToggleMusic);
         btnHome.onClick.AddListener(GoHome);
         btnHomeOver.onClick.AddListener(GoHome);
+        btnHomeWin.onClick.AddListener(GoHome);
     }
 
     private void OnDestroy()
     {
         RemoveButtonListener(btnsReplay);
-        RemoveButtonListener(btnPause, btnResume, btnSound, btnMusic, btnHome, btnHomeOver);
+        RemoveButtonListener(btnPause, btnResume, btnSound, btnMusic, btnHome, btnHomeOver, btnHomeWin);
 
         GameEvent.OnDisplayStartGate -= PlayGateSound;
         GameEvent.OnCompleteLevel -= PlayWinSound;
+        GameEvent.OnBossKilled -= DisplayWinGame;
     }
 
     private void RemoveButtonListener(params Button[] buttons)
@@ -115,6 +120,18 @@ public class IngameController : Singleton<IngameController>
         AudioManager.instance.soundSource.PlayOneShot(clickButtonClip);
         SceneManager.LoadScene("Home");
         Time.timeScale = 1;
+    }
+
+    public void DisplayWinGame()
+    {
+        StartCoroutine(OpenWinPanel());
+    }
+
+    IEnumerator OpenWinPanel()
+    {
+        yield return new WaitForSeconds(3.0f);
+        Time.timeScale = 0;
+        panelWinBoss.gameObject.SetActive(true);
     }
 
     void ToggleSound()
