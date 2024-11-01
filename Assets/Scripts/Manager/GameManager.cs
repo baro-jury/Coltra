@@ -45,6 +45,12 @@ public class GameManager : MonoBehaviour
     }
 
     public ColorData colorData;
+    public bool introDisplayed;
+
+    void Start()
+    {
+        introDisplayed = false;
+    }
 
     public void SetLevel(int level)
     {
