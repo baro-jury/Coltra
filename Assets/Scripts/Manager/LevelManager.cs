@@ -20,6 +20,7 @@ public class LevelManager : Singleton<LevelManager>
 
     [SerializeField] private GameObject monsterObj;
     [SerializeField] private GameObject bulletObj;
+    [SerializeField] private GameObject bossImgObj;
 
     protected override void Awake()
     {
@@ -66,6 +67,15 @@ public class LevelManager : Singleton<LevelManager>
 
     public void UpdateProgress(Dictionary<CharacterColor, string> progressData)
     {
+        if(currentLevel == 6)
+        {
+            bossImgObj.SetActive(true);
+            return;
+        }
+        else
+        {
+            bossImgObj.SetActive(false);
+        }
         foreach (KeyValuePair<CharacterColor, string> item in progressData)
         {
             if (!objectiveInstances.ContainsKey(item.Key))

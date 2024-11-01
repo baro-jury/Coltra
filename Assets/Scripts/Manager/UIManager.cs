@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] GameObject gameOverUI;
-
+    
     protected override void Awake()
     {
         GameEvent.OnPlayerDead += ShowGameOverUI;
