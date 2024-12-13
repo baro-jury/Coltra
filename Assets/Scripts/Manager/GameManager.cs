@@ -93,7 +93,13 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.DeleteKey(MUSIC);
         PlayerPrefs.Save();
 
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
+    Application.Quit();
+#elif UNITY_WEBGL
+    Application.ExternalEval("document.location.reload(true);");
+#endif
     }
 
 }
